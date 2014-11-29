@@ -1,67 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<style type="text/css">
-			html, body, #map-canvas {
-				height: 100%;
-				margin: 0;
-				padding: 0;
-			}
-		</style>
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key="></script>
-		<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script type="text/javascript">
 		
-			var map;
-			
-			$(function() {
-
-				initialize();
-
-			});
-
-			function initialize() 
-			{
-				var mapOptions = {
-					center : {
-						lat : -34.397,
-						lng : 150.644
-					},
-					zoom : 4
-				};
-				map = new google.maps.Map($("#map-canvas").get(0), mapOptions);
-				
-				for(var i=0; i<500; i++) {
-					addMarkers();	
-				}
-			}
-
-			function addMarkers() 
-			{
-				var point = getRandomPoint();	
-				var marker = new google.maps.Marker({
-					position : point,
-					title : "Hello World!"
-				});
-
-				// To add the marker to the map, call setMap();
-				marker.setMap(map);
-				map.setCenter(point)
-			}
-			
-			function getRandomPoint()
-			{
-				var latMin = -26
-				var latMax = -20
-				var lngMin = 130
-				var lngMax = 135
-				var lat = latMin + Math.random() * (latMax - latMin)
-				var lng = lngMin + Math.random() * (lngMax - lngMin)
-				var point = new google.maps.LatLng(lat, lng);
-				return point
-			}
-			
-		</script>
+		<link rel="stylesheet/less" type="text/css" href="css/newfoundland.less"/>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key="></script>
+		<script type="text/javascript" src="com/libs/require.js"></script>
+		<script type="text/javascript" src="newfoundland.js"></script>
+		
 	</head>
 	<body>
 		<div id="map-canvas"></div>
