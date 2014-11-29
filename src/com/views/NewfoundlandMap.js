@@ -2,8 +2,11 @@ define([
 		
 		"jquery", 
 		"backbone",
+		"jquerycsv",
+		"com/models/Constants",
+		"com/services/LocationService",
 	
-	], function( $, Backbone ) {
+	], function( $, Backbone, CSV, Constants, LocationService ) {
 		
     // Extends Backbone.View
     var NewfoundlandMap = Backbone.View.extend( {
@@ -14,6 +17,11 @@ define([
          */
         initialize: function(options)  {
 			this.render();
+			
+			var onLocations = function(locations) {
+				console.log(locations);
+			}
+			LocationService.getLocations(onLocations);
         },
 
         /**
@@ -21,11 +29,13 @@ define([
          * @param none
          */
         render: function() {
+        	this.$el.addClass(Constants.ROOT_CONTAINER_CSS_CLASS);
         	this.createMap();
             return this; //Maintains chainability
         },
         
-        createMap: function() {
+        createMap: function() 
+        {
 			var mapOptions = {
 				center : {
 					lat : -34.397,

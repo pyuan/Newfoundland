@@ -9,6 +9,7 @@ require.config( {
             "backbone"		: "com/libs/backbone-min",
             "handlebars"	: "com/libs/handlebars-v2.0.0",
             "less"			: "com/libs/lessc",
+            "jquerycsv"		: "com/libs/jquery.csv-0.71.min",
 
       },
 
