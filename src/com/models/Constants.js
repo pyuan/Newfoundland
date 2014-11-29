@@ -9,6 +9,7 @@ define([
     var Constants = Backbone.Model.extend({}, {
     	
     	/**** Application constants ****/
+    	DEBUG_MODE : true, //if set to true, print to console
     	GLOBAL_WINDOW_VARIABLE : "NEWFOUNDLAND_MAP",
     	ROOT_CONTAINER_CSS_CLASS : "newfoundland-root",
     	

@@ -13,6 +13,18 @@ define([
 			
 		},
     	
+    }, 
+    {
+    	
+    	PROPERTY_KEYS : {
+    		NAME : "name",
+    		LATITUDE : "lat",
+    		LONGITUDE : "lng",
+    		ADDRESS : "address",
+    		PHONE : "phone",
+    		URL : "url"
+    	}
+    		
     });
 
     // Returns the class

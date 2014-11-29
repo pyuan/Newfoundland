@@ -3,25 +3,37 @@ define([
 		"jquery", 
 		"backbone",
 		"jquerycsv",
+		"com/collections/LocationModelCollection",
 		"com/models/Constants",
 		"com/services/LocationService",
+		"com/services/DebugService",
 	
-	], function( $, Backbone, CSV, Constants, LocationService ) {
+	], function( $, Backbone, CSV, LocationModelCollection, Constants, LocationService, DebugService ) {
 		
     // Extends Backbone.View
     var NewfoundlandMap = Backbone.View.extend( {
+		
+		locations: new LocationModelCollection(),
+		map: null,
 		
         /**
          * The View Constructor
          * @param el, DOM element of the page
          */
-        initialize: function(options)  {
-			this.render();
-			
+        initialize: function(options)  
+        {
+			var self = this;
 			var onLocations = function(locations) {
-				console.log(locations);
+				self.locations.add(locations.models);
+				DebugService.println("Locations data loaded", locations);
 			}
 			LocationService.getLocations(onLocations);
+
+			//this.listenTo(this.locations, "change", this.render);
+			//this.locations.bind("add", this.render);
+			//this.locations.bind("remove", this.render);
+			//this.locations.bind("change", this.render);
+			this.render();
         },
 
         /**
@@ -29,6 +41,7 @@ define([
          * @param none
          */
         render: function() {
+        	DebugService.println("", this.$el);
         	this.$el.addClass(Constants.ROOT_CONTAINER_CSS_CLASS);
         	this.createMap();
             return this; //Maintains chainability
