@@ -1,22 +1,4 @@
-Name,Latitude,Longitude,URL,Phone,Address,,,
-Trader Joe’s,41.893590,-87.626298,http://www.traderjoes.com/,(312) 951-6369,"44 E Ontario St Chicago, IL 60611",,,
-Whole Foods Market,41.895143,-87.629162,http://www.wholefoodsmarket.com/stores/goldcoast,(312) 932-9600,"30 W Huron St Chicago, IL 60654",,,
-Treasure Island Foods,41.894733,-87.617542,http://tifoods.com/,(312) 664-0400,"Northwestern University-Tarry Research and Educational Building 680 N Lake Shore Dr #902 Chicago, IL 60611",,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
-,,,,,,,,
+Name,Latitude,Longitude,URL,Phone,Address
+Trader Joe’s,41.89359,-87.626298,http://www.traderjoes.com/,(312) 951-6369,"44 E Ontario St Chicago, IL 60611"
+Whole Foods Market,41.895143,-87.629162,http://www.wholefoodsmarket.com/stores/goldcoast,(312) 932-9600,"30 W Huron St Chicago, IL 60654"
+Treasure Island Foods,41.894733,-87.617542,http://tifoods.com/,(312) 664-0400,"Northwestern University-Tarry Research and Educational Building 680 N Lake Shore Dr #902 Chicago, IL 60611"
