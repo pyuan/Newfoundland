@@ -13,7 +13,6 @@ define([
     // Extends Backbone.View
     var NewfoundlandMap = Backbone.View.extend( {
 		
-		locations: new LocationModelCollection(),
 		map: null,
 		
         /**
@@ -24,16 +23,14 @@ define([
         {
 			var self = this;
 			var onLocations = function(locations) {
-				self.locations.add(locations.models);
+				self.collection = locations
 				DebugService.println("Locations data loaded", locations);
+				
+				self.collection.bind("add", this.render);
+				self.collection.bind("remove", this.render);
+				self.render();
 			}
 			LocationService.getLocations(onLocations);
-
-			//this.listenTo(this.locations, "change", this.render);
-			//this.locations.bind("add", this.render);
-			//this.locations.bind("remove", this.render);
-			//this.locations.bind("change", this.render);
-			this.render();
         },
 
         /**
@@ -41,7 +38,6 @@ define([
          * @param none
          */
         render: function() {
-        	DebugService.println("", this.$el);
         	this.$el.addClass(Constants.ROOT_CONTAINER_CSS_CLASS);
         	this.createMap();
             return this; //Maintains chainability
@@ -50,10 +46,6 @@ define([
         createMap: function() 
         {
 			var mapOptions = {
-				center : {
-					lat : -34.397,
-					lng : 150.644
-				},
 				zoom : 4
 			};
 			map = new google.maps.Map(this.$el.get(0), mapOptions);
