@@ -8,13 +8,16 @@ define([
     // Extends Backbone.Model
     var Constants = Backbone.Model.extend({}, {
     	
-    	/**** Application constants ****/
-    	DEBUG_MODE : true, //if set to true, print to console
-    	GLOBAL_WINDOW_VARIABLE : "NEWFOUNDLAND_MAP",
-    	ROOT_CONTAINER_CSS_CLASS : "newfoundland-root",
+    	/**** Google Maps Constants ****/
+		GOOGLE_MAPS_API_URL : "https://maps.googleapis.com/maps/api/js?key=",    	
     	
-    	/**** data services constants ****/
-    	LOCATION_DATA_URL : "data/locations.csv",
+    	/**** Application constants ****/
+    	GLOBAL_WINDOW_VARIABLE : "NEWFOUNDLAND_MAP",
+    	GLOBAL_INIT_FUNCTION_NAME : "Newfoundland_init",
+    	
+    	/**** LESS constants ****/
+    	LESS_FILE_HREF : "css/newfoundland.less",
+    	ROOT_CONTAINER_CSS_CLASS : "newfoundland-root",
     	
     });
 

@@ -19,7 +19,7 @@ define([
     	{
     		$.ajax({
 				type: "GET",
-				url: Constants.LOCATION_DATA_URL,
+				url: NewfoundlandConfig.LOCATIONS_CSV_FILE_URL,
 				cache: false,
 				success: function(csv)
 				{
