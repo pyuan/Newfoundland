@@ -3,10 +3,11 @@ define([
 		"jquery", 
 		"backbone",
 		"com/services/DataService",
+		"com/services/DebugService",
 		"com/models/LocationModel",
 		"com/collections/LocationModelCollection",
 	
-	], function( $, Backbone, DataService, LocationModel, LocationModelCollection ) {
+	], function( $, Backbone, DataService, DebugService, LocationModel, LocationModelCollection ) {
 		
     // Extends Backbone.Model
     var LocationService = Backbone.Model.extend({}, {
@@ -17,7 +18,8 @@ define([
     	 */
     	getLocations: function(onLocations)
     	{
-    		var onDataHandler = function(json) {
+    		var onDataHandler = function(json) 
+    		{
     			var locations = [];
     			for(i in json) {
     				var item = json[i];
@@ -32,6 +34,7 @@ define([
     				locations.push(location);
     			}
     			var collection = new LocationModelCollection(locations);
+    			DebugService.println("Locations data loaded", collection);
     			
     			if(onLocations) {
     				onLocations(collection);

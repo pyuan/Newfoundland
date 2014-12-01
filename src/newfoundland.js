@@ -66,7 +66,8 @@ require([
 			FileService.loadLessFile(Constants.LESS_FILE_HREF);
 			
 			//initialize widget and store in window
-			window[Constants.GLOBAL_WINDOW_VARIABLE] = new NewfoundlandMap({el: $("#map-canvas")});
+			var containerSelector = ConfigService.getConfig("MAIN_CONTAINER_CSS_SELECTOR");
+			window[Constants.GLOBAL_WINDOW_VARIABLE] = new NewfoundlandMap({el: $(containerSelector)});
 		}
 		
 	});	

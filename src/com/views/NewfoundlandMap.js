@@ -24,8 +24,6 @@ define([
 			var self = this;
 			var onLocations = function(locations) {
 				self.collection = locations
-				DebugService.println("Locations data loaded", locations);
-				
 				self.collection.bind("add", this.render);
 				self.collection.bind("remove", this.render);
 				self.render();

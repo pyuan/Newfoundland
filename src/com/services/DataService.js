@@ -24,6 +24,7 @@ define([
 				cache: false,
 				success: function(csv)
 				{
+					csv = DataUtils.cleanCSVString(csv);
 					var csvJson = $.csv.toObjects(csv);
 					var jsonArray = DataUtils.cleanCSVJSON(csvJson);
 
