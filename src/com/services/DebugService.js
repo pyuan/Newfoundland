@@ -3,9 +3,8 @@ define([
 		"jquery", 
 		"backbone",
 		"com/models/Constants",
-		"com/services/ConfigService",
 	
-	], function( $, Backbone, Constants, ConfigService ) {
+	], function( $, Backbone, Constants ) {
 		
     // Extends Backbone.Model
     var DebugService = Backbone.Model.extend({}, {
@@ -17,7 +16,11 @@ define([
 			 */
 			println: function(label, obj) 
 			{
-				if(window.console && ConfigService.getConfig("DEBUG_MODE")) {
+				//can't use ConfigService because it would create a circular reference
+				var config = window[Constants.CONFIG_OBJECT_NAME];
+				var debugMode = config && config.DEBUG_MODE != undefined ? config.DEBUG_MODE : Constants.DEBUG_MODE
+				
+				if(window.console && debugMode) {
 					console.log(">> " + label + " >> ", obj);	
 				}
 			}	

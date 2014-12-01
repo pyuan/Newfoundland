@@ -3,8 +3,9 @@ define([
 		"jquery", 
 		"backbone",
 		"com/models/Constants",
+		"com/services/DebugService",
 	
-	], function( $, Backbone, Constants ) {
+	], function( $, Backbone, Constants, DebugService ) {
 		
     // Extends Backbone.Model
     var ConfigService = Backbone.Model.extend({}, {
@@ -17,10 +18,12 @@ define([
     	getConfig: function(key) 
     	{
     		var config = window[Constants.CONFIG_OBJECT_NAME]; 
-    		if(config && config[key]) {
+    		if(config && config[key] != undefined) {
+    			DebugService.println("Configuration found for " + key, config[key]);
     			return config[key];
     		}
-    		else{
+    		else {
+    			DebugService.println("Configuration not found for " + key + ", use default", Constants[key]);
     			return Constants[key];
     		}
     	},
