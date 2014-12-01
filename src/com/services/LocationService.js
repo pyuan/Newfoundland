@@ -28,6 +28,9 @@ define([
     				attributes[LocationModel.PROPERTY_KEYS.LATITUDE] = item["latitude"] ? item["latitude"] : -1;
     				attributes[LocationModel.PROPERTY_KEYS.LONGITUDE] = item["longitude"] ? item["longitude"] : -1;
     				attributes[LocationModel.PROPERTY_KEYS.ADDRESS] = item["address"] ? item["address"] : "";
+    				attributes[LocationModel.PROPERTY_KEYS.CITY] = item["city"] ? item["city"] : "";
+    				attributes[LocationModel.PROPERTY_KEYS.STATE] = item["state"] ? item["state"] : "";
+    				attributes[LocationModel.PROPERTY_KEYS.ZIPCODE] = item["zipcode"] ? item["zipcode"] : "";
     				attributes[LocationModel.PROPERTY_KEYS.PHONE] = item["phone"] ? item["phone"] : "";
     				attributes[LocationModel.PROPERTY_KEYS.URL] = item["url"] ? item["url"] : "";
     				var location = new LocationModel(attributes);

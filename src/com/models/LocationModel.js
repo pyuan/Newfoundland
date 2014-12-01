@@ -21,6 +21,9 @@ define([
     		LATITUDE : "lat",
     		LONGITUDE : "lng",
     		ADDRESS : "address",
+    		CITY : "city",
+    		STATE : "state",
+    		ZIPCODE : "zipcode",
     		PHONE : "phone",
     		URL : "url"
     	}
