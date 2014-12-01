@@ -3,8 +3,9 @@ define([
 		"jquery", 
 		"backbone",
 		"com/models/Constants",
+		"com/services/ConfigService",
 	
-	], function( $, Backbone, Constants ) {
+	], function( $, Backbone, Constants, ConfigService ) {
 		
     // Extends Backbone.Model
     var DebugService = Backbone.Model.extend({}, {
@@ -16,7 +17,7 @@ define([
 			 */
 			println: function(label, obj) 
 			{
-				if(window.console && NewfoundlandConfig.DEBUG_MODE) {
+				if(window.console && ConfigService.getConfig("DEBUG_MODE")) {
 					console.log(">> " + label + " >> ", obj);	
 				}
 			}	

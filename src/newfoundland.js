@@ -43,14 +43,20 @@ require([
 		"less",
 		"com/views/NewfoundlandMap",
 		"com/models/Constants",
+		"com/services/ConfigService",
 		"com/services/FileService",
 	
-	], function( $, Backbone, Handlebars, Less, NewfoundlandMap, Constants, FileService ) {
+	], function( $, Backbone, Handlebars, Less, NewfoundlandMap, Constants, ConfigService, FileService ) {
 	
 	$(function() {
 		
 		//load google maps API
-		var url = Constants.GOOGLE_MAPS_API_URL + NewfoundlandConfig.GOOGLE_MAPS_API_KEY + "&callback=" + Constants.GLOBAL_INIT_FUNCTION_NAME + "";
+		var url = Constants.GOOGLE_MAPS_API_URL + ConfigService.getConfig("GOOGLE_MAPS_API_KEY");
+		var apiKey = ConfigService.getConfig("GOOGLE_MAPS_API_KEY");
+		if(apiKey) {
+			url += "key=" + apiKey
+		}
+		url += "&callback=" + Constants.GLOBAL_INIT_FUNCTION_NAME + "";
 		FileService.loadJSFile(url);
 		
 		//store init function in window so app can be initialized after google maps has been loaded
