@@ -16,7 +16,7 @@ define([
 			 */
 			println: function(label, obj) 
 			{
-				if(window.console && Constants.DEBUG_MODE) {
+				if(window.console && NewfoundlandConfig.DEBUG_MODE) {
 					console.log(">> " + label + " >> ", obj);	
 				}
 			}	

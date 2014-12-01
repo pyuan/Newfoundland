@@ -43,13 +43,25 @@ require([
 		"less",
 		"com/views/NewfoundlandMap",
 		"com/models/Constants",
+		"com/services/FileService",
 	
-	], function( $, Backbone, Handlebars, Less, NewfoundlandMap, Constants ) {
+	], function( $, Backbone, Handlebars, Less, NewfoundlandMap, Constants, FileService ) {
 	
 	$(function() {
 		
-		//initialize widget and store in window
-		window[Constants.GLOBAL_WINDOW_VARIABLE] = new NewfoundlandMap({el: $("#map-canvas")});
+		//load google maps API
+		var url = Constants.GOOGLE_MAPS_API_URL + NewfoundlandConfig.GOOGLE_MAPS_API_KEY + "&callback=" + Constants.GLOBAL_INIT_FUNCTION_NAME + "";
+		FileService.loadJSFile(url);
+		
+		//store init function in window so app can be initialized after google maps has been loaded
+		window[Constants.GLOBAL_INIT_FUNCTION_NAME] = function() 
+		{
+			//load less 
+			FileService.loadLessFile(Constants.LESS_FILE_HREF);
+			
+			//initialize widget and store in window
+			window[Constants.GLOBAL_WINDOW_VARIABLE] = new NewfoundlandMap({el: $("#map-canvas")});
+		}
 		
 	});	
 	
