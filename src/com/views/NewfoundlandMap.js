@@ -126,9 +126,10 @@ define([
 				this.infoWindow.close();	
 			}
 			
+			var model = marker.model;
 			this.infoWindow = new InfoBubble({
 				map: this.map,
-				content: '<div class="phoneytext">Some label</div>',
+				content: '<div class="phoneytext">' + model.getFullAddress() + '</div>',
 				position: marker.getPosition(),
 				shadowStyle: 0,
 				padding: 10,
@@ -140,7 +141,7 @@ define([
 				disableAutoPan: true,
 				hideCloseButton: false,
 				arrowPosition: 30,
-				backgroundClassName: 'phoney',
+				backgroundClassName: 'info-window',
 				arrowStyle: 2
 	        });
 	        
