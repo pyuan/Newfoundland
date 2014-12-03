@@ -3,10 +3,11 @@ define([
 		"jquery", 
 		"backbone",
 		"com/services/DataService",
+		"com/services/DebugService",
 		"com/models/LocationModel",
 		"com/collections/LocationModelCollection",
 	
-	], function( $, Backbone, DataService, LocationModel, LocationModelCollection ) {
+	], function( $, Backbone, DataService, DebugService, LocationModel, LocationModelCollection ) {
 		
     // Extends Backbone.Model
     var LocationService = Backbone.Model.extend({}, {
@@ -17,7 +18,8 @@ define([
     	 */
     	getLocations: function(onLocations)
     	{
-    		var onDataHandler = function(json) {
+    		var onDataHandler = function(json) 
+    		{
     			var locations = [];
     			for(i in json) {
     				var item = json[i];
@@ -26,12 +28,16 @@ define([
     				attributes[LocationModel.PROPERTY_KEYS.LATITUDE] = item["latitude"] ? item["latitude"] : -1;
     				attributes[LocationModel.PROPERTY_KEYS.LONGITUDE] = item["longitude"] ? item["longitude"] : -1;
     				attributes[LocationModel.PROPERTY_KEYS.ADDRESS] = item["address"] ? item["address"] : "";
+    				attributes[LocationModel.PROPERTY_KEYS.CITY] = item["city"] ? item["city"] : "";
+    				attributes[LocationModel.PROPERTY_KEYS.STATE] = item["state"] ? item["state"] : "";
+    				attributes[LocationModel.PROPERTY_KEYS.ZIPCODE] = item["zipcode"] ? item["zipcode"] : "";
     				attributes[LocationModel.PROPERTY_KEYS.PHONE] = item["phone"] ? item["phone"] : "";
     				attributes[LocationModel.PROPERTY_KEYS.URL] = item["url"] ? item["url"] : "";
     				var location = new LocationModel(attributes);
     				locations.push(location);
     			}
     			var collection = new LocationModelCollection(locations);
+    			DebugService.println("Locations data loaded", collection);
     			
     			if(onLocations) {
     				onLocations(collection);

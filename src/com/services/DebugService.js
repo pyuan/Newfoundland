@@ -16,7 +16,11 @@ define([
 			 */
 			println: function(label, obj) 
 			{
-				if(window.console && NewfoundlandConfig.DEBUG_MODE) {
+				//can't use ConfigService because it would create a circular reference
+				var config = window[Constants.CONFIG_OBJECT_NAME];
+				var debugMode = config && config.DEBUG_MODE != undefined ? config.DEBUG_MODE : Constants.DEBUG_MODE
+				
+				if(window.console && debugMode) {
 					console.log(">> " + label + " >> ", obj);	
 				}
 			}	

@@ -5,8 +5,9 @@ define([
 		"jquerycsv",
 		"com/models/Constants",
 		"com/utils/DataUtils",
+		"com/services/ConfigService",
 	
-	], function( $, Backbone, jquerycsv, Constants, DataUtils ) {
+	], function( $, Backbone, jquerycsv, Constants, DataUtils, ConfigService ) {
 		
     // Extends Backbone.Model
     var DataService = Backbone.Model.extend({}, {
@@ -19,10 +20,11 @@ define([
     	{
     		$.ajax({
 				type: "GET",
-				url: NewfoundlandConfig.LOCATIONS_CSV_FILE_URL,
+				url: ConfigService.getConfig("LOCATIONS_CSV_FILE_URL"),
 				cache: false,
 				success: function(csv)
 				{
+					csv = DataUtils.cleanCSVString(csv);
 					var csvJson = $.csv.toObjects(csv);
 					var jsonArray = DataUtils.cleanCSVJSON(csvJson);
 
