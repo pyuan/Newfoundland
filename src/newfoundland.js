@@ -4,13 +4,12 @@ require.config( {
       paths: {
 
             // Core Libraries
-            "jquery"		: "http://code.jquery.com/jquery-2.1.1.min", 
-            "underscore"	: "com/libs/underscore-min",
-            "backbone"		: "com/libs/backbone-min",
-            "handlebars"	: "com/libs/handlebars-v2.0.0",
-            "less"			: "com/libs/lessc",
-            "jquerycsv"		: "com/libs/jquery.csv-0.71.min",
-
+            "jquery"			: "http://code.jquery.com/jquery-2.1.1.min", 
+            "underscore"		: "com/libs/underscore-min",
+            "backbone"			: "com/libs/backbone-min",
+            "handlebars"		: "com/libs/handlebars-v2.0.0",
+            "less"				: "com/libs/lessc",
+            "jquerycsv"			: "com/libs/jquery.csv-0.71.min",
       },
 
       // Sets the configuration for your third party scripts that are not AMD compatible
@@ -64,6 +63,10 @@ require([
 		{
 			//load less 
 			FileService.loadLessFile(Constants.LESS_FILE_HREF);
+			
+			//load requireJS incompatible libraries
+			FileService.loadJSFile("com/libs/markerclusterer_packed.js"); //marker clusterer
+			FileService.loadJSFile("com/libs/infobubble-compiled.js"); //custom info window
 			
 			//initialize widget and store in window
 			var containerSelector = ConfigService.getConfig("MAIN_CONTAINER_CSS_SELECTOR");

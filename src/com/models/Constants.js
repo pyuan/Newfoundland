@@ -13,6 +13,7 @@ define([
     	GOOGLE_MAPS_API_KEY : "",
     	LOCATIONS_CSV_FILE_URL : "data/locations.csv",
     	MAIN_CONTAINER_CSS_SELECTOR : "",
+    	MAP_MARKER_IMAGE : "",
     	
     	/**** Google Maps Constants ****/
 		GOOGLE_MAPS_API_URL : "https://maps.googleapis.com/maps/api/js?",   

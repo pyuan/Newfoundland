@@ -12,6 +12,9 @@ var NewfoundlandConfig =
 	LOCATIONS_CSV_FILE_URL : "data/locations.csv",
 	
 	//css selector to create the widget in
-	MAIN_CONTAINER_CSS_SELECTOR : "#map-canvas"
+	MAIN_CONTAINER_CSS_SELECTOR : "#map-canvas",
+	
+	//full path to the marker image
+	MAP_MARKER_IMAGE : "images/icon_marker.png"
 	
 };
