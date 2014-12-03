@@ -52,12 +52,17 @@ define([
          */
         createMap: function() 
         {
+        	//if no container specified, stop creating map
+			var container = this.$el.get(0);
+			if(!container) {
+				return;
+			}
+			
 			var mapOptions = {
 				zoom: 1 //set default zoom level
 			};
-			var container = this.$el.get(0)
 			this.map = new google.maps.Map(container, mapOptions);
-		
+			
 			var self = this;
 			this.bounds = new google.maps.LatLngBounds();
 			var markers = [];
@@ -76,7 +81,7 @@ define([
 				if(self.infoWindow) {
 					self.infoWindow.close();
 				}
-	        });
+	       });
 		},
 		
 		/**
