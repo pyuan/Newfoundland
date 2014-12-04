@@ -29,6 +29,11 @@ define([
     	LESS_FILE_HREF : "css/newfoundland.less",
     	ROOT_CONTAINER_CSS_CLASS : "newfoundland-root",
     	
+    	/**** templates constants ****/
+    	FOLDER_TEMPLATES : "com/templates/",
+    	EXTENSION_TEMPLATES : ".handlebars",
+    	TEMPLATE_INFO_WINDOW : "info_window",
+    	
     });
 
     // Returns the class

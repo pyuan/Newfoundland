@@ -9,9 +9,11 @@ define([
 		"com/services/LocationService",
 		"com/services/DebugService",
 		"com/services/ConfigService",
+		"com/services/TemplateService",
+		"com/views/InfoWindow",
 	
 	], function( $, Backbone, CSV, LocationModelCollection, Constants, LocationModel, 
-		LocationService, DebugService, ConfigService ) {
+		LocationService, DebugService, ConfigService, TemplateService, InfoWindow ) {
 		
     // Extends Backbone.View
     var NewfoundlandMap = Backbone.View.extend( {
@@ -75,13 +77,6 @@ define([
 			//center to fit all markers
 			var markerCluster = new MarkerClusterer(this.map, markers);
 			this.map.fitBounds(this.bounds);
-			
-			//add map zoom level listener
-			google.maps.event.addListener(this.map, 'zoom_changed', function() {
-				if(self.infoWindow) {
-					self.infoWindow.close();
-				}
-	       });
 		},
 		
 		/**
@@ -126,31 +121,8 @@ define([
 				this.infoWindow.close();	
 			}
 			
-			var model = marker.model;
-			this.infoWindow = new InfoBubble({
-				map: this.map,
-				content: '<div class="phoneytext">' + model.getFullAddress() + '</div>',
-				position: marker.getPosition(),
-				shadowStyle: 0,
-				padding: 10,
-				backgroundColor: 'rgba(255,255,255, 1)',
-				borderRadius: 0,
-				arrowSize: 10,
-				borderWidth: 0,
-				borderColor: 'rgba(0, 0, 0, 0)',
-				disableAutoPan: true,
-				hideCloseButton: false,
-				arrowPosition: 30,
-				backgroundClassName: 'info-window',
-				arrowStyle: 2
-	        });
-	        
-	        //offset positon of info window
-	        var lng = marker.getPosition().lng() + (0.00001 * Math.pow(2, (21 - this.map.getZoom())));
-	        var lat = marker.getPosition().lat() + (0.00002 * Math.pow(2, (21 - this.map.getZoom())));
-        	this.infoWindow.setPosition(new google.maps.LatLng(lat, lng)); 
-	        
-	        this.infoWindow.open();
+			this.infoWindow = new InfoWindow();
+			this.infoWindow.open(this.map, marker);
 		},
 
         /**
