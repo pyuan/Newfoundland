@@ -7,15 +7,41 @@
 	margin: 0;
 	padding: 0;
 	
-	.info-window {
+	@window-bg-alpha: 0.95;
+	@tip-height: 8px;
+	
+	.info-window 
+	{
 		margin: 0px 0px 0px 0px;
-		background: rgba(255, 255, 255, 0.95);
-		padding: 5px;
 		width: 200px;
 		box-sizing: border-box;
 		
 		* {
 			box-sizing: border-box;
+		}
+		
+		.tip {
+			position: absolute;
+			overflow: hidden;
+			width: 100%;
+			height: @tip-height;
+			left: 0px;
+			top: 0px;
+			background: url("images/info_window_tip.png") no-repeat center center;
+			opacity: @window-bg-alpha;
+			z-index: 2;
+		}
+		
+		.content {
+			position: absolute;
+			overflow: hidden;
+			width: 100%;
+			left: 0px;
+			top: @tip-height;
+			background: rgba(255, 255, 255, @window-bg-alpha);
+			padding: 10px;
+			box-shadow: 1px 1px 5px #aaa;
+			z-index: 1;
 		}
 	}
 }

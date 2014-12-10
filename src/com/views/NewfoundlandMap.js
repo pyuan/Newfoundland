@@ -95,8 +95,16 @@ define([
 			};
 			
 			var markerImage = ConfigService.getConfig("MAP_MARKER_IMAGE");
-			if(markerImage) {
-				options.icon = markerImage;
+			if(markerImage) 
+			{
+				var icon = 
+				{
+					url: markerImage,
+				    size: new google.maps.Size(35, 35), // This marker is 20 pixels wide by 32 pixels tall.
+				    origin: new google.maps.Point(0, 0), // The origin for this image is 0,0.
+				    anchor: new google.maps.Point(17, 17) // The anchor for this image is the base of the center point at 17,17
+				};
+				options.icon = icon;
 			}
 			
 			var marker = new google.maps.Marker(options);
@@ -121,8 +129,15 @@ define([
 				this.infoWindow.close();	
 			}
 			
-			this.infoWindow = new InfoWindow();
-			this.infoWindow.open(this.map, marker);
+			//allow info window to be toggled
+			if(!this.infoWindow || this.infoWindow.model !== marker.model) 
+			{
+				this.infoWindow = new InfoWindow();
+				this.infoWindow.open(this.map, marker);
+			}
+			else {
+				this.infoWindow = null;
+			}
 		},
 
         /**

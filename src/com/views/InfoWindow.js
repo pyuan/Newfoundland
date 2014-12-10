@@ -12,6 +12,7 @@ define([
     var InfoWindow = Backbone.View.extend( {
 		
 		base : null,
+		model: null,
 		
         /**
          * The View Constructor
@@ -30,23 +31,23 @@ define([
         open: function(map, marker)
         {
         	var self = this;
-			var model = marker.model;
-			var params = {address: model.getFullAddress()}
+			this.model = marker.model;
+			var params = {address: this.model.getFullAddress()}
 			TemplateService.getTemplate(Constants.TEMPLATE_INFO_WINDOW, params, function(html){
 	        	
 	        	var options = {
 					content: $(html).get(0),
 					disableAutoPan: false,
 					maxWidth: 0,
-					pixelOffset: new google.maps.Size(-100, 0),
+					pixelOffset: new google.maps.Size(-100, 20),
 					zIndex: null,
 					/*boxStyle: { 
-						//background: "url('tipbox.gif') no-repeat",
-						opacity: 0.75,
+						background: "url('images/info_window_tip.png') no-repeat",
+						opacity: 0.95,
 						width: "280px"
 					},*/
-					closeBoxMargin: "5px 5px 5px 5px",
-					closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
+					//closeBoxMargin: "5px 5px 5px 5px",
+					closeBoxURL: "", //"http://www.google.com/intl/en_us/mapfiles/close.gif",
 					infoBoxClearance: new google.maps.Size(5, 5), //from edges of the map
 					isHidden: false,
 					alignBottom: false,

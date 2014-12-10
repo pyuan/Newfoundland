@@ -15,6 +15,6 @@ var NewfoundlandConfig =
 	MAIN_CONTAINER_CSS_SELECTOR : "#map-canvas",
 	
 	//full path to the marker image
-	MAP_MARKER_IMAGE : "http://pyuan.github.io/Newfoundland/src/images/icon_marker.png"
+	MAP_MARKER_IMAGE : "images/icon_marker.png" //"http://pyuan.github.io/Newfoundland/src/images/icon_marker.png"
 	
 };
