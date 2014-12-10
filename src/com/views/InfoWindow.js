@@ -30,16 +30,18 @@ define([
          */
         open: function(map, marker)
         {
-        	var self = this;
 			this.model = marker.model;
-			var params = {address: this.model.getFullAddress()}
+			
+			var self = this;
+			var params = this.model.toJSON();
+			params.address = this.model.getFullAddress();
 			TemplateService.getTemplate(Constants.TEMPLATE_INFO_WINDOW, params, function(html){
 	        	
 	        	var options = {
 					content: $(html).get(0),
 					disableAutoPan: false,
 					maxWidth: 0,
-					pixelOffset: new google.maps.Size(-100, 20),
+					pixelOffset: new google.maps.Size(-125, 20), //offset so info window is centered horizontally
 					zIndex: null,
 					/*boxStyle: { 
 						background: "url('images/info_window_tip.png') no-repeat",
@@ -48,7 +50,7 @@ define([
 					},*/
 					//closeBoxMargin: "5px 5px 5px 5px",
 					closeBoxURL: "", //"http://www.google.com/intl/en_us/mapfiles/close.gif",
-					infoBoxClearance: new google.maps.Size(5, 5), //from edges of the map
+					infoBoxClearance: new google.maps.Size(10, 10), //from edges of the map
 					isHidden: false,
 					alignBottom: false,
 					pane: "floatPane",
@@ -56,6 +58,13 @@ define([
 				};
 				self.base = new InfoBox(options);
 		        self.base.open(map, marker);
+		        
+		        //set element reference and zoom button click handler
+		        self.$el = $(options.content);
+		        self.$el.find(".zoom").on("click", function() {
+		        	map.setCenter(marker.position);
+		        	map.setZoom(17);
+		        });
 	        	
 	        });
        	},

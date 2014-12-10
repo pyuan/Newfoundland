@@ -1,4 +1,9 @@
 <div class="info-window">
 	<div class="tip">&nbsp;</div>
-	<div class="content">{{address}}</div>
+	<div class="content">
+		<div class="name">{{#if url}}<a href="{{url}}" target="_blank">{{/if}}{{name}}{{#if url}}</a>{{/if}}</div>
+		{{#if address}}<div class="address">{{address}}</div>{{/if}}
+		{{#if phone}}<a href="tel: {{phone}}" target="_blank"><div class="phone">{{phone}}</div></a>{{/if}}
+		<div class="zoom">&nbsp;</div>
+	</div>
 </div>

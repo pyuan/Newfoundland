@@ -9,12 +9,15 @@
 	
 	@window-bg-alpha: 0.95;
 	@tip-height: 8px;
+	@base-font-size: 10px;
 	
 	.info-window 
 	{
 		margin: 0px 0px 0px 0px;
-		width: 200px;
+		width: 250px;
 		box-sizing: border-box;
+		font-size: @base-font-size;
+		font-family: sans-serif;
 		
 		* {
 			box-sizing: border-box;
@@ -32,16 +35,38 @@
 			z-index: 2;
 		}
 		
-		.content {
+		.content 
+		{
 			position: absolute;
 			overflow: hidden;
 			width: 100%;
 			left: 0px;
-			top: @tip-height;
+			top: (@tip-height - 1);
 			background: rgba(255, 255, 255, @window-bg-alpha);
 			padding: 10px;
 			box-shadow: 1px 1px 5px #aaa;
 			z-index: 1;
+			
+			.name {
+				font-weight: bold;
+				font-size: (@base-font-size + 2);
+				margin-bottom: 10px;
+			}
+			
+			.address {
+				margin-bottom: 5px;
+			}
+			
+			.zoom {
+				position: absolute;
+				overflow: hidden;
+				width: 15px;
+				height: 15px;
+				top: 5px;
+				right: 5px;
+				background: red;
+				cursor: pointer;
+			}
 		}
 	}
 }
