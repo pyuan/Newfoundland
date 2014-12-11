@@ -23,6 +23,7 @@ define([
 		bounds: null,
 		infoWindow: null,
 		searchBar: null,
+		markers: null,
 		
         /**
          * The View Constructor
@@ -56,7 +57,7 @@ define([
         			self.recenterMap();
         		});
         		
-        		var params = {el: self.$el.find(".search-container"), collection: self.collection};
+        		var params = {el: self.$el.find(".search-container"), collection: self.collection, map: self};
         		self.searchBar = new SearchBar(params);
         	});
             return this; //Maintains chainability
@@ -92,15 +93,15 @@ define([
 			
 			var self = this;
 			this.bounds = new google.maps.LatLngBounds();
-			var markers = [];
+			this.markers = [];
 			self.collection.each(function(location) {
 				var marker = self.createMarker(location);
-				markers.push(marker);
+				self.markers.push(marker);
 				self.bounds.extend(marker.getPosition());
 			});
 			
 			//center to fit all markers
-			var markerCluster = new MarkerClusterer(this.map, markers);
+			var markerCluster = new MarkerClusterer(this.map, this.markers);
 			this.recenterMap();
 		},
 		
@@ -116,7 +117,7 @@ define([
 			
 			this.map.setZoom(0); //change zoom to fix cluster marker disappearing bug
 			this.map.fitBounds(this.bounds);
-			DebugService.println("Reset Map", this.bounds);
+			DebugService.println("Reset Map", "");
 		},
 		
 		/**
@@ -178,6 +179,26 @@ define([
 			else {
 				this.infoWindow = null;
 			}
+		},
+		
+		/**
+		 * zoom in and center on a marker
+		 * @param {LocationModel} location
+		 */
+		showMarker: function(location)
+		{
+			var marker;
+			for(var i=0; i<this.markers.length; i++) {
+				marker = this.markers[i];
+				var model = marker.model;
+				if(location === model) {
+					break;
+				}
+			}
+			
+			this.map.setCenter(marker.position);
+		    this.map.setZoom(Constants.MAP_MARKER_ZOOM_LEVEL);
+		    this.onMarkerClick(marker);
 		},
 
         /**

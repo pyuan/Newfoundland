@@ -64,6 +64,43 @@
 			font-family: sans-serif;
 			outline: none;
 		}
+		
+		.results 
+		{
+			position: relative;
+			overflow: auto;
+			width: 100%;
+			max-height: 110px;
+			padding: 5px 0px;
+			background: rgba(255, 255, 255, @window-bg-alpha);
+			box-shadow: 1px 1px 5px #aaa;
+			margin: 5px 0px 0px 0px;
+			font-family: sans-serif;
+			font-size: @base-font-size;
+			display: none;
+			
+			> ul {
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			.result {
+				position: relative;
+				overflow: hidden;
+				width: 100%;
+				padding: 10px 10px;
+				cursor: pointer;
+				border-bottom: 1px dotted #ddd;
+			}
+			
+			.result:last-child {
+				border-bottom: none;
+			}
+			
+			.result:hover {
+				color: blue;
+			}
+		}
 	}
 
 	.info-window 

@@ -63,7 +63,7 @@ define([
 		        self.$el = $(options.content);
 		        self.$el.find(".zoom").on("click", function() {
 		        	map.setCenter(marker.position);
-		        	map.setZoom(17);
+		        	map.setZoom(Constants.MAP_MARKER_ZOOM_LEVEL);
 		        });
 	        	
 	        });
