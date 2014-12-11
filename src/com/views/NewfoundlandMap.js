@@ -11,9 +11,10 @@ define([
 		"com/services/ConfigService",
 		"com/services/TemplateService",
 		"com/views/InfoWindow",
+		"com/views/SearchBar",
 	
 	], function( $, Backbone, CSV, LocationModelCollection, Constants, LocationModel, 
-		LocationService, DebugService, ConfigService, TemplateService, InfoWindow ) {
+		LocationService, DebugService, ConfigService, TemplateService, InfoWindow, SearchBar ) {
 		
     // Extends Backbone.View
     var NewfoundlandMap = Backbone.View.extend( {
@@ -21,6 +22,7 @@ define([
 		map: null,
 		bounds: null,
 		infoWindow: null,
+		searchBar: null,
 		
         /**
          * The View Constructor
@@ -39,12 +41,24 @@ define([
         },
 
         /**
-         * Renders the view
+         * Renders the view from template
          * @param none
          */
-        render: function() {
-        	this.$el.addClass(Constants.ROOT_CONTAINER_CSS_CLASS);
-        	this.createMap();
+        render: function() 
+        {
+        	var self = this
+        	TemplateService.getTemplate(Constants.TEMPLATE_MAP, {}, function(html) {
+        		var element = $(html).addClass(Constants.ROOT_CONTAINER_CSS_CLASS);
+        		self.$el.html(element);
+        		self.createMap();
+        		
+        		self.$el.find(".reset").on("click", function(){
+        			self.recenterMap();
+        		});
+        		
+        		var params = {el: self.$el.find(".search-container"), collection: self.collection};
+        		self.searchBar = new SearchBar(params);
+        	});
             return this; //Maintains chainability
         },
         
@@ -55,13 +69,24 @@ define([
         createMap: function() 
         {
         	//if no container specified, stop creating map
-			var container = this.$el.get(0);
+			var container = this.$el.find(".map").get(0);
 			if(!container) {
 				return;
 			}
 			
 			var mapOptions = {
-				zoom: 1 //set default zoom level
+				zoom: 1, //set default zoom level
+				mapTypeControl: false,
+				panControl: false,
+			    zoomControl: true,
+			    zoomControlOptions: {
+			        position: google.maps.ControlPosition.LEFT_BOTTOM
+			    },
+			    scaleControl: true,
+			    streetViewControl: true,
+			    streetViewControlOptions: {
+			        position: google.maps.ControlPosition.LEFT_BOTTOM
+			    }
 			};
 			this.map = new google.maps.Map(container, mapOptions);
 			
@@ -76,7 +101,22 @@ define([
 			
 			//center to fit all markers
 			var markerCluster = new MarkerClusterer(this.map, markers);
+			this.recenterMap();
+		},
+		
+		/**
+		 * zoom to show all markers and center 
+		 * @param none
+		 */
+		recenterMap: function() 
+		{
+			if(this.infoWindow) {
+				this.infoWindow.close();	
+			}
+			
+			this.map.setZoom(0); //change zoom to fix cluster marker disappearing bug
 			this.map.fitBounds(this.bounds);
+			DebugService.println("Reset Map", this.bounds);
 		},
 		
 		/**

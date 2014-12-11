@@ -44,7 +44,29 @@ define([
     			}	
     		}
     		DataService.getLocationsCSV(onDataHandler);
-    	}    	
+    	},
+    	
+    	/**
+    	 * filter a LocationModelCollection with the given key
+		 * @param {LocationModelCollection} locations
+		 * @param {String} key
+    	 */
+    	search: function(locations, key)
+    	{
+    		var arr = []
+        	locations.each(function(location) {
+        		var name = location.get(LocationModel.PROPERTY_KEYS.NAME);
+        		var address = location.getFullAddress();
+        		var nameMatchIndex = name.toLowerCase().indexOf(key.toLowerCase());
+        		var addressMatchIndex = address.toLowerCase().indexOf(key.toLowerCase());
+        		if(nameMatchIndex != -1 || addressMatchIndex != -1) {
+        			arr.push(location);
+        		}
+        	});
+        	
+        	var filtered = new LocationModelCollection(arr);
+        	return filtered;
+    	},	
     	
     });
 

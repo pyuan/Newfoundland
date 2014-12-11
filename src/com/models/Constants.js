@@ -33,6 +33,8 @@ define([
     	FOLDER_TEMPLATES : "com/templates/",
     	EXTENSION_TEMPLATES : ".handlebars",
     	TEMPLATE_INFO_WINDOW : "info_window",
+    	TEMPLATE_MAP : "map",
+    	TEMPLATE_SEARCH : "search",
     	
     });
 
