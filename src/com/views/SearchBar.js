@@ -64,31 +64,35 @@ define([
         		return;
         	}
         	
-        	var filtered = LocationService.search(this.collection, key);
-        	this.showSearchResults(filtered);
+        	var results = LocationService.search(this.collection, key);
+        	this.showSearchResults(results);
         },
         
         /**
          * show the search results
- 		 * @param {LocationModelCollection} locations
+ 		 * @param {Object} results, contains LocationModel, nameMatchIndex and addressMatchIndex
          */
-        showSearchResults: function(locations)
+        showSearchResults: function(results)
         {
-        	var results = this.$el.find(".results").hide();
-        	if(!locations || locations.length == 0) {
+        	var resultsContainer = this.$el.find(".results").hide();
+        	if(!results || results.length == 0) {
         		return;
         	}
         	
+        	var key = this.$el.find(".search").val();
         	var items = [];
-        	locations.each(function(location) {
-        		var item = location.toJSON();
-        		item.cid = location.cid;
+        	for(var i=0; i<results.length; i++) 
+        	{
+        		var result = results[i];
+        		var location = result.location;
+        		var item = {cid: location.cid};
+        		item.label = LocationService.getSearchResultLabel(result, key);
         		items.push(item);
-        	});
+        	}
 
         	var params = {items: items};
         	TemplateService.getTemplate(Constants.TEMPLATE_SEARCH_RESULTS, params, function(html) {
-        		$(results).html(html).show();
+        		$(resultsContainer).html(html).show();
         	});
         },
         

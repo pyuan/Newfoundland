@@ -11,7 +11,7 @@
 	
 	@window-bg-alpha: 0.95;
 	@tip-height: 8px;
-	@base-font-size: 10px;
+	@base-font-size: 12px;
 	@map-button-size: 35px;
 	
 	* {
@@ -65,6 +65,7 @@
 			outline: none;
 		}
 		
+		@result-font-size: @base-font-size;
 		.results 
 		{
 			position: relative;
@@ -76,7 +77,8 @@
 			box-shadow: 1px 1px 5px #aaa;
 			margin: 5px 0px 0px 0px;
 			font-family: sans-serif;
-			font-size: @base-font-size;
+			font-size: @result-font-size;
+			color: #555;
 			display: none;
 			
 			> ul {
@@ -91,6 +93,12 @@
 				padding: 10px 10px;
 				cursor: pointer;
 				border-bottom: 1px dotted #ddd;
+				
+				.match {
+					font-weight: bold;
+					font-size: (@result-font-size+2);
+					color: #000;
+				}
 			}
 			
 			.result:last-child {
@@ -99,6 +107,10 @@
 			
 			.result:hover {
 				color: blue;
+				
+				.match {
+					color: blue;
+				}
 			}
 		}
 	}

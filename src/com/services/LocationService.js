@@ -6,8 +6,9 @@ define([
 		"com/services/DebugService",
 		"com/models/LocationModel",
 		"com/collections/LocationModelCollection",
+		"com/utils/DataUtils",
 	
-	], function( $, Backbone, DataService, DebugService, LocationModel, LocationModelCollection ) {
+	], function( $, Backbone, DataService, DebugService, LocationModel, LocationModelCollection, DataUtils ) {
 		
     // Extends Backbone.Model
     var LocationService = Backbone.Model.extend({}, {
@@ -50,23 +51,46 @@ define([
     	 * filter a LocationModelCollection with the given key
 		 * @param {LocationModelCollection} locations
 		 * @param {String} key
+		 * @return {Object} results
     	 */
     	search: function(locations, key)
     	{
-    		var arr = []
+    		var results = []
         	locations.each(function(location) {
         		var name = location.get(LocationModel.PROPERTY_KEYS.NAME);
         		var address = location.getFullAddress();
         		var nameMatchIndex = name.toLowerCase().indexOf(key.toLowerCase());
         		var addressMatchIndex = address.toLowerCase().indexOf(key.toLowerCase());
-        		if(nameMatchIndex != -1 || addressMatchIndex != -1) {
-        			arr.push(location);
+        		if(nameMatchIndex != -1 || addressMatchIndex != -1) 
+        		{
+        			var result = {location: location, nameIndex: nameMatchIndex, addressIndex: addressMatchIndex};
+        			results.push(result);
         		}
         	});
         	
-        	var filtered = new LocationModelCollection(arr);
-        	return filtered;
+        	return results;
     	},	
+    	
+    	/**
+    	 * get the label for a search result
+ 		 * @param {Object} result, contains Locationmodel, nameIndex, addressIndex
+ 		 * @param {String} searchKey, used to stylize result label
+ 		 * @return {String} label
+    	 */
+    	getSearchResultLabel: function(result, searchKey)
+    	{
+    		var label = "";
+    		var location = result.location;
+    		if(result.nameIndex != -1) {
+    			var name = location.get(LocationModel.PROPERTY_KEYS.NAME);
+    			label = DataUtils.boldKeyInString(name, searchKey);
+    		}
+    		else if(result.addressIndex != -1) {
+    			var address = location.getFullAddress();
+    			label = DataUtils.boldKeyInString(address, searchKey);
+    		}
+    		return label;
+    	},
     	
     });
 
