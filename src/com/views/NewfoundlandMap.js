@@ -113,6 +113,7 @@ define([
 		{
 			if(this.infoWindow) {
 				this.infoWindow.close();	
+				this.infoWindow = null;
 			}
 			
 			this.map.setZoom(0); //change zoom to fix cluster marker disappearing bug
