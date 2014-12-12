@@ -53,13 +53,18 @@ define([
         		self.$el.html(element);
         		self.createMap();
         		
-        		self.$el.find(".reset").on("click", function(){
-        			self.recenterMap();
-        		});
-        		
         		var params = {el: self.$el.find(".search-container"), collection: self.collection, map: self};
         		self.searchBar = new SearchBar(params);
         	});
+        	
+        	this.$el.on("click", ".reset", function() {
+    			self.recenterMap();
+    		});
+    		
+    		this.$el.on("click", ".resetToUser", function() {
+    			self.recenterMapToUser();
+    		});
+        	
             return this; //Maintains chainability
         },
         
@@ -119,6 +124,35 @@ define([
 			this.map.setZoom(0); //change zoom to fix cluster marker disappearing bug
 			this.map.fitBounds(this.bounds);
 			DebugService.println("Reset Map", "");
+		},
+		
+		/**
+		 * zoom to center to where the user is
+		 * @param none
+		 */
+		recenterMapToUser: function()
+		{
+			if(navigator.geolocation) 
+			{
+				var self = this;
+				var button = this.$el.find(".resetToUser").addClass("loading");
+				navigator.geolocation.getCurrentPosition(function(position) {
+					
+					button.removeClass("loading");
+					var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+					self.map.setCenter(location);
+					self.map.setZoom(0); //to trigger refresh
+					self.map.setZoom(12);
+					DebugService.println("Center map to user", position);
+					
+			    }, function() {
+			    	
+			    	button.removeClass("loading");
+			    	self.recenterMap();
+			    	DebugService.println("User location not accessible", "");
+			    	
+			    });
+			}
 		},
 		
 		/**

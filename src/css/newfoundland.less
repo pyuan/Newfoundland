@@ -13,6 +13,7 @@
 	@tip-height: 8px;
 	@base-font-size: 12px;
 	@map-button-size: 35px;
+	@dir-images: "images";
 	
 	* {
 		box-sizing: border-box;
@@ -28,20 +29,42 @@
 		z-index: 1;
 	}
 	
-	.reset {
+	.buttons
+	{
 		position: absolute;
-		overflow: hidden;
-		width: @map-button-size;
-		height: @map-button-size;
+		overflow: visible;
 		bottom: 25px;
 		right: 10px;
+		margin: 0px;
+		padding: 0px;
+		text-align: right;
 		z-index: 2;
-		background: rgba(255, 255, 255, @window-bg-alpha);
-		border-radius: (@map-button-size/2);
-		box-shadow: 1px 1px 5px #aaa;
-		cursor: pointer;
+			
+		.button {
+			position: relative;
+			overflow: hidden;
+			float: left;
+			width: @map-button-size;
+			height: @map-button-size;
+			margin: 0px 5px;
+			background-color: rgba(255, 255, 255, @window-bg-alpha);
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-size: (@map-button-size - 15) (@map-button-size - 15);
+			border-radius: (@map-button-size/2);
+			box-shadow: 1px 1px 5px #aaa;
+			cursor: pointer;
+		}
+		
+		.button.loading {
+			background-image: url("@{dir-images}/spinner.gif");
+		}
+		
+		.button:active {
+			opacity: 0.8;
+		}
 	}
-	
+
 	.search-container 
 	{
 		position: absolute;
@@ -129,7 +152,7 @@
 			height: @tip-height;
 			left: 0px;
 			top: 0px;
-			background: url("images/info_window_tip.png") no-repeat center center;
+			background: url("@{dir-images}/info_window_tip.png") no-repeat center center;
 			opacity: @window-bg-alpha;
 			z-index: 2;
 		}
