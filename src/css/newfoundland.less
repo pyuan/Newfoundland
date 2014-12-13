@@ -63,6 +63,14 @@
 		.button:active {
 			opacity: 0.8;
 		}
+		
+		.button.reset {
+			background-image: url("@{dir-images}/icon_view_all.png");
+		}
+		
+		.button.resetToUser {
+			background-image: url("@{dir-images}/icon_view_nearby.png");
+		}
 	}
 
 	.search-container 
@@ -81,6 +89,10 @@
 			width: 100%;
 			padding: 10px;
 			background: rgba(255, 255, 255, @window-bg-alpha);
+			background-image: url("@{dir-images}/icon_search.png");
+			background-repeat: no-repeat;
+			background-size: 20px 20px;
+			background-position: right 10px center;
 			box-shadow: 1px 1px 5px #aaa;
 			border: none;
 			font-size: (@base-font-size+5);
@@ -186,7 +198,8 @@
 				height: 15px;
 				top: 5px;
 				right: 5px;
-				background: red;
+				background: url("@{dir-images}/icon_zoom.png") no-repeat center center;
+				background-size: contain;
 				cursor: pointer;
 			}
 		}
