@@ -70,15 +70,18 @@ require([
 			FileService.loadLessFile(Constants.LESS_FILE_HREF);
 			
 			//load requireJS incompatible libraries
+			
+			//custom info window
+			FileService.loadJSFile(Constants.RESOURCE_URL + "/com/libs/infobox_packed.js"); 
+			
+			//marker clusterer
 			FileService.loadJSFile(Constants.RESOURCE_URL + "/com/libs/markerclusterer_packed.js", function() {
+				
 				//initialize widget and store in window
 				var containerSelector = ConfigService.getConfig("MAIN_CONTAINER_CSS_SELECTOR");
 				window[Constants.GLOBAL_WINDOW_VARIABLE] = new NewfoundlandMap({el: $(containerSelector)});
-			}); //marker clusterer
-			//FileService.loadJSFile("com/libs/infobubble-compiled.js"); //custom info window
-			FileService.loadJSFile(Constants.RESOURCE_URL + "/com/libs/infobox_packed.js"); //custom info window
-			
-			
+				
+			});
 		}
 		
 	});	
