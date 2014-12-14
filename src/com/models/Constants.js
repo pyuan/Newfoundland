@@ -14,6 +14,7 @@ define([
     	LOCATIONS_CSV_FILE_URL : "data/locations.csv",
     	MAIN_CONTAINER_CSS_SELECTOR : "",
     	MAP_MARKER_IMAGE : "",
+    	LESS_FILE_HREF : "css/newfoundland.less",
     	
     	/**** Google Maps Constants ****/
 		GOOGLE_MAPS_API_URL : "https://maps.googleapis.com/maps/api/js?",   
@@ -28,7 +29,6 @@ define([
     	CONFIG_OBJECT_NAME : "NewfoundlandConfig",
     	
     	/**** LESS constants ****/
-    	LESS_FILE_HREF : "css/newfoundland.less",
     	ROOT_CONTAINER_CSS_CLASS : "newfoundland-root",
     	
     	/**** templates constants ****/

@@ -138,6 +138,11 @@ define([
 				var button = this.$el.find(".resetToUser").addClass("loading");
 				navigator.geolocation.getCurrentPosition(function(position) {
 					
+					if(self.infoWindow) {
+						self.infoWindow.close();	
+						self.infoWindow = null;
+					}
+					
 					button.removeClass("loading");
 					var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 					self.map.setCenter(location);
