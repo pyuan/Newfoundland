@@ -14,7 +14,7 @@ define([
     	LOCATIONS_CSV_FILE_URL : "data/locations.csv",
     	MAIN_CONTAINER_CSS_SELECTOR : "",
     	MAP_MARKER_IMAGE : "",
-    	LESS_FILE_HREF : "css/newfoundland.less",
+    	RESOURCE_URL : "",
     	
     	/**** Google Maps Constants ****/
 		GOOGLE_MAPS_API_URL : "https://maps.googleapis.com/maps/api/js?",   
@@ -23,12 +23,12 @@ define([
     	/**** Application constants ****/
     	GLOBAL_WINDOW_VARIABLE : "NEWFOUNDLAND_MAP",
     	GLOBAL_INIT_FUNCTION_NAME : "Newfoundland_init",
-    	RESOURCE_URL : "http://pyuan.github.io/Newfoundland/src",
     	
     	/**** Configurations constants ****/
     	CONFIG_OBJECT_NAME : "NewfoundlandConfig",
     	
     	/**** LESS constants ****/
+    	LESS_FILE_HREF : "css/newfoundland.less",
     	ROOT_CONTAINER_CSS_CLASS : "newfoundland-root",
     	
     	/**** templates constants ****/

@@ -4,8 +4,9 @@ define([
 		"backbone",
 		"handlebars",
 		"com/models/Constants",
+		"com/services/ConfigService",
 		
-	], function($, Backbone, Handlebars, Constants) {
+	], function($, Backbone, Handlebars, Constants, ConfigService) {
 
 	var TemplateService = Backbone.Model.extend({},
 	
@@ -22,7 +23,7 @@ define([
 		{
 			$.ajax({
 				type: "GET",
-				url: Constants.RESOURCE_URL + "/" + Constants.FOLDER_TEMPLATES + template + Constants.EXTENSION_TEMPLATES,
+				url: ConfigService.getConfig("RESOURCE_URL") + Constants.FOLDER_TEMPLATES + template + Constants.EXTENSION_TEMPLATES,
 				async: typeof async =="undefined" ? false : async,
 				cache: true,
 				dataType: "text",

@@ -5,12 +5,13 @@ require.config( {
 
             // Core Libraries
             "jquery"			: "http://code.jquery.com/jquery-2.1.1.min", 
-            "underscore"		: "http://pyuan.github.io/Newfoundland/src/com/libs/underscore-min",
-            "backbone"			: "http://pyuan.github.io/Newfoundland/src/com/libs/backbone-min",
-            "handlebars"		: "http://pyuan.github.io/Newfoundland/src/com/libs/handlebars-v2.0.0",
-            "less"				: "http://pyuan.github.io/Newfoundland/src/com/libs/lessc",
-            "jquerycsv"			: "http://pyuan.github.io/Newfoundland/src/com/libs/jquery.csv-0.71.min",
-            "com"				: "http://pyuan.github.io/Newfoundland/src/com/",
+            "underscore"		: NewfoundlandConfig.RESOURCE_URL + "com/libs/underscore-min",
+            "backbone"			: NewfoundlandConfig.RESOURCE_URL + "com/libs/backbone-min",
+            "handlebars"		: NewfoundlandConfig.RESOURCE_URL + "com/libs/handlebars-v2.0.0",
+            "less"				: NewfoundlandConfig.RESOURCE_URL + "com/libs/lessc",
+            "jquerycsv"			: NewfoundlandConfig.RESOURCE_URL + "com/libs/jquery.csv-0.71.min",
+            "com"				: NewfoundlandConfig.RESOURCE_URL + "com/",
+            
       },
 
       // Sets the configuration for your third party scripts that are not AMD compatible
@@ -67,15 +68,15 @@ require([
 		window[Constants.GLOBAL_INIT_FUNCTION_NAME] = function() 
 		{
 			//load less 
-			FileService.loadLessFile(ConfigService.getConfig("LESS_FILE_HREF"));
+			FileService.loadLessFile(ConfigService.getConfig("RESOURCE_URL") + Constants.LESS_FILE_HREF);
 			
 			//load requireJS incompatible libraries
 			
 			//custom info window
-			FileService.loadJSFile(Constants.RESOURCE_URL + "/com/libs/infobox_packed.js"); 
+			FileService.loadJSFile(ConfigService.getConfig("RESOURCE_URL") + "com/libs/infobox_packed.js"); 
 			
 			//marker clusterer
-			FileService.loadJSFile(Constants.RESOURCE_URL + "/com/libs/markerclusterer_packed.js", function() {
+			FileService.loadJSFile(ConfigService.getConfig("RESOURCE_URL") + "com/libs/markerclusterer_packed.js", function() {
 				
 				//initialize widget and store in window
 				var containerSelector = ConfigService.getConfig("MAIN_CONTAINER_CSS_SELECTOR");
