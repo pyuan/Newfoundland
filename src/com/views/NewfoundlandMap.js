@@ -181,7 +181,7 @@ define([
 				var icon = 
 				{
 					url: markerImage,
-				    size: new google.maps.Size(35, 35), // This marker is 20 pixels wide by 32 pixels tall.
+				    size: new google.maps.Size(35, 35), // This marker is 35 pixels wide by 35 pixels tall.
 				    origin: new google.maps.Point(0, 0), // The origin for this image is 0,0.
 				    anchor: new google.maps.Point(17, 17) // The anchor for this image is the base of the center point at 17,17
 				};
