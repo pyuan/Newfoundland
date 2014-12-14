@@ -35,13 +35,15 @@ define([
 			var self = this;
 			var params = this.model.toJSON();
 			params.address = this.model.getFullAddress();
+			
+			var offsetY = marker.getIcon() ? 20 : 5;
 			TemplateService.getTemplate(Constants.TEMPLATE_INFO_WINDOW, params, function(html){
 	        	
 	        	var options = {
 					content: $(html).get(0),
 					disableAutoPan: false,
 					maxWidth: 0,
-					pixelOffset: new google.maps.Size(-125, 20), //offset so info window is centered horizontally
+					pixelOffset: new google.maps.Size(-125, offsetY), //offset so info window is centered horizontally
 					zIndex: null,
 					/*boxStyle: { 
 						background: "url('images/info_window_tip.png') no-repeat",
