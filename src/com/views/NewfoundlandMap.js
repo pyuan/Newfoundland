@@ -9,9 +9,12 @@ define([
 		"com/services/LocationService",
 		"com/services/DebugService",
 		"com/services/ConfigService",
+		"com/services/TemplateService",
+		"com/views/InfoWindow",
+		"com/views/SearchBar",
 	
 	], function( $, Backbone, CSV, LocationModelCollection, Constants, LocationModel, 
-		LocationService, DebugService, ConfigService ) {
+		LocationService, DebugService, ConfigService, TemplateService, InfoWindow, SearchBar ) {
 		
     // Extends Backbone.View
     var NewfoundlandMap = Backbone.View.extend( {
@@ -19,6 +22,8 @@ define([
 		map: null,
 		bounds: null,
 		infoWindow: null,
+		searchBar: null,
+		markers: null,
 		
         /**
          * The View Constructor
@@ -37,12 +42,29 @@ define([
         },
 
         /**
-         * Renders the view
+         * Renders the view from template
          * @param none
          */
-        render: function() {
-        	this.$el.addClass(Constants.ROOT_CONTAINER_CSS_CLASS);
-        	this.createMap();
+        render: function() 
+        {
+        	var self = this
+        	TemplateService.getTemplate(Constants.TEMPLATE_MAP, {}, function(html) {
+        		var element = $(html).addClass(Constants.ROOT_CONTAINER_CSS_CLASS);
+        		self.$el.html(element);
+        		self.createMap();
+        		
+        		var params = {el: self.$el.find(".search-container"), collection: self.collection, map: self};
+        		self.searchBar = new SearchBar(params);
+        	});
+        	
+        	this.$el.on("click", ".reset", function() {
+    			self.recenterMap();
+    		});
+    		
+    		this.$el.on("click", ".resetToUser", function() {
+    			self.recenterMapToUser();
+    		});
+        	
             return this; //Maintains chainability
         },
         
@@ -53,35 +75,84 @@ define([
         createMap: function() 
         {
         	//if no container specified, stop creating map
-			var container = this.$el.get(0);
+			var container = this.$el.find(".map").get(0);
 			if(!container) {
 				return;
 			}
 			
 			var mapOptions = {
-				zoom: 1 //set default zoom level
+				zoom: 1, //set default zoom level
+				mapTypeControl: false,
+				panControl: false,
+			    zoomControl: true,
+			    zoomControlOptions: {
+			        position: google.maps.ControlPosition.LEFT_BOTTOM
+			    },
+			    scaleControl: true,
+			    streetViewControl: false,
+			    streetViewControlOptions: {
+			        position: google.maps.ControlPosition.LEFT_BOTTOM
+			    }
 			};
 			this.map = new google.maps.Map(container, mapOptions);
 			
 			var self = this;
 			this.bounds = new google.maps.LatLngBounds();
-			var markers = [];
+			this.markers = [];
 			self.collection.each(function(location) {
 				var marker = self.createMarker(location);
-				markers.push(marker);
+				self.markers.push(marker);
 				self.bounds.extend(marker.getPosition());
 			});
 			
 			//center to fit all markers
-			var markerCluster = new MarkerClusterer(this.map, markers);
-			this.map.fitBounds(this.bounds);
+			var markerCluster = new MarkerClusterer(this.map, this.markers);
+			this.recenterMap();
+		},
+		
+		/**
+		 * zoom to show all markers and center 
+		 * @param none
+		 */
+		recenterMap: function() 
+		{
+			if(this.infoWindow) {
+				this.infoWindow.close();	
+				this.infoWindow = null;
+			}
 			
-			//add map zoom level listener
-			google.maps.event.addListener(this.map, 'zoom_changed', function() {
-				if(self.infoWindow) {
-					self.infoWindow.close();
-				}
-	       });
+			this.map.setZoom(0); //change zoom to fix cluster marker disappearing bug
+			this.map.fitBounds(this.bounds);
+			DebugService.println("Reset Map", "");
+		},
+		
+		/**
+		 * zoom to center to where the user is
+		 * @param none
+		 */
+		recenterMapToUser: function()
+		{
+			if(navigator.geolocation) 
+			{
+				var self = this;
+				var button = this.$el.find(".resetToUser").addClass("loading");
+				navigator.geolocation.getCurrentPosition(function(position) {
+					
+					button.removeClass("loading");
+					var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+					self.map.setCenter(location);
+					self.map.setZoom(0); //to trigger refresh
+					self.map.setZoom(12);
+					DebugService.println("Center map to user", position);
+					
+			    }, function() {
+			    	
+			    	button.removeClass("loading");
+			    	self.recenterMap();
+			    	DebugService.println("User location not accessible", "");
+			    	
+			    });
+			}
 		},
 		
 		/**
@@ -100,8 +171,16 @@ define([
 			};
 			
 			var markerImage = ConfigService.getConfig("MAP_MARKER_IMAGE");
-			if(markerImage) {
-				options.icon = markerImage;
+			if(markerImage) 
+			{
+				var icon = 
+				{
+					url: markerImage,
+				    size: new google.maps.Size(35, 35), // This marker is 20 pixels wide by 32 pixels tall.
+				    origin: new google.maps.Point(0, 0), // The origin for this image is 0,0.
+				    anchor: new google.maps.Point(17, 17) // The anchor for this image is the base of the center point at 17,17
+				};
+				options.icon = icon;
 			}
 			
 			var marker = new google.maps.Marker(options);
@@ -126,30 +205,35 @@ define([
 				this.infoWindow.close();	
 			}
 			
-			this.infoWindow = new InfoBubble({
-				map: this.map,
-				content: '<div class="phoneytext">Some label</div>',
-				position: marker.getPosition(),
-				shadowStyle: 0,
-				padding: 10,
-				backgroundColor: 'rgba(255,255,255, 1)',
-				borderRadius: 0,
-				arrowSize: 10,
-				borderWidth: 0,
-				borderColor: 'rgba(0, 0, 0, 0)',
-				disableAutoPan: true,
-				hideCloseButton: false,
-				arrowPosition: 30,
-				backgroundClassName: 'phoney',
-				arrowStyle: 2
-	        });
-	        
-	        //offset positon of info window
-	        var lng = marker.getPosition().lng() + (0.00001 * Math.pow(2, (21 - this.map.getZoom())));
-	        var lat = marker.getPosition().lat() + (0.00002 * Math.pow(2, (21 - this.map.getZoom())));
-        	this.infoWindow.setPosition(new google.maps.LatLng(lat, lng)); 
-	        
-	        this.infoWindow.open();
+			//allow info window to be toggled
+			if(!this.infoWindow || this.infoWindow.model !== marker.model) 
+			{
+				this.infoWindow = new InfoWindow();
+				this.infoWindow.open(this.map, marker);
+			}
+			else {
+				this.infoWindow = null;
+			}
+		},
+		
+		/**
+		 * zoom in and center on a marker
+		 * @param {LocationModel} location
+		 */
+		showMarker: function(location)
+		{
+			var marker;
+			for(var i=0; i<this.markers.length; i++) {
+				marker = this.markers[i];
+				var model = marker.model;
+				if(location === model) {
+					break;
+				}
+			}
+			
+			this.map.setCenter(marker.position);
+		    this.map.setZoom(Constants.MAP_MARKER_ZOOM_LEVEL);
+		    this.onMarkerClick(marker);
 		},
 
         /**

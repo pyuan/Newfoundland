@@ -12,6 +12,21 @@ define([
 		{
 			
 		},
+		
+		/**
+		 * return the full address of a location
+		 * @param none
+		 * @return {String} address
+		 */
+		getFullAddress: function() 
+		{
+			//can't reference class static properties from within an instance of that class
+			var address = this.get("address"); 
+			address += " " + this.get("city");
+			address += " " + this.get("state");
+			address += " " + this.get("zipcode");
+			return address;
+		},
     	
     }, 
     {

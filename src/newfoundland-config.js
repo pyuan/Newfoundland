@@ -2,7 +2,7 @@ var NewfoundlandConfig =
 {
 	
 	//if set to true, print debug console statements
-	DEBUG_MODE : true,
+	DEBUG_MODE : false,
 	
 	//API key for google maps, optional
 	//can be found in your Google API console, if true, allows usage to be tracked

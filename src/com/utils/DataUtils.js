@@ -56,7 +56,22 @@ define([
 				}
 			}
 			return jsonArray;
-    	}
+    	},
+    	
+    	/**
+    	 * bold the key in some string and return the html markup of the bolded string
+		 * @param {String} string
+		 * @param {String} searchKey
+		 * @return {String} boldedString
+    	 */
+    	boldKeyInString: function(string, searchKey)
+    	{
+    		var startIndex = string.toLowerCase().indexOf(searchKey.toLowerCase());
+			var boldedString = string.substring(0, startIndex);
+			boldedString += "<span class='match'>" + string.substr(startIndex, searchKey.length) + "</span>";
+			boldedString += string.substring(startIndex + searchKey.length);
+			return boldedString;
+    	},
     	
     });
 

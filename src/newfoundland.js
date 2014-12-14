@@ -28,6 +28,10 @@ require.config( {
 			"underscore": {
             	"exports": "_"
             },
+            
+            "jquerycsv" : {
+            	"deps" : ["jquery"],
+            },
 
       } // end Shim Configuration
 
@@ -66,7 +70,8 @@ require([
 			
 			//load requireJS incompatible libraries
 			FileService.loadJSFile("com/libs/markerclusterer_packed.js"); //marker clusterer
-			FileService.loadJSFile("com/libs/infobubble-compiled.js"); //custom info window
+			//FileService.loadJSFile("com/libs/infobubble-compiled.js"); //custom info window
+			FileService.loadJSFile("com/libs/infobox_packed.js"); //custom info window
 			
 			//initialize widget and store in window
 			var containerSelector = ConfigService.getConfig("MAIN_CONTAINER_CSS_SELECTOR");
