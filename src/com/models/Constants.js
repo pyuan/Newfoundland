@@ -12,7 +12,7 @@ define([
     	DEBUG_MODE : true,
     	GOOGLE_MAPS_API_KEY : "",
     	LOCATIONS_CSV_FILE_URL : "data/locations.csv",
-    	MAIN_CONTAINER_CSS_SELECTOR : "",
+    	MAIN_CONTAINER_CSS_SELECTOR : "#map-container",
     	MAP_MARKER_IMAGE : "",
     	RESOURCE_URL : "",
     	

@@ -9,15 +9,59 @@ var NewfoundlandConfig =
 	GOOGLE_MAPS_API_KEY : "",
 	
 	//full url path for the locations csv data file 
-	LOCATIONS_CSV_FILE_URL : "https://cdn.shopify.com/s/files/1/0150/9610/files/locations.csv?688",
+	LOCATIONS_CSV_FILE_URL : "",
 	
 	//css selector to create the widget in
-	MAIN_CONTAINER_CSS_SELECTOR : "#map-container",
+	MAIN_CONTAINER_CSS_SELECTOR : "",
 	
 	//full path to the marker image
-	MAP_MARKER_IMAGE : "http://pyuan.github.io/Newfoundland/src/images/icon_marker.png",
+	MAP_MARKER_IMAGE : "",
 	
-	//path to module resources
-	RESOURCE_URL : "" //"http://pyuan.github.io/Newfoundland/src/"
+	//REQUIERD prefix for loading components
+	RESOURCE_URL : "",
+	
+	/**
+	 * get url variable
+	 * source: http://stackoverflow.com/a/21903119
+ 	 * @param {String} sParam
+ 	 * @return {String} value
+	 */
+	getUrlParameter: function(sParam) 
+	{
+	    var sPageURL = window.location.search.substring(1);
+	    var sURLVariables = sPageURL.split('&');
+	    for (var i = 0; i < sURLVariables.length; i++) 
+	    {
+	        var sParameterName = sURLVariables[i].split('=');
+	        if (sParameterName[0] == sParam) 
+	        {
+	            return sParameterName[1];
+	        }
+	    }
+	},
+	
+	/**
+	 * append javascript files to the head
+	 * @param {String} filePath
+	 */
+	loadJS: function(filePath) {
+		var script = $("<script/>").attr("type", "text/javascript").attr("src", filePath);
+		$("head").append(script);
+	}
 	
 };
+
+$(function() {
+	
+	//set configs based on url vars
+	NewfoundlandConfig.DEBUG_MODE = NewfoundlandConfig.getUrlParameter("debug").toLowerCase() == "true";
+	NewfoundlandConfig.LOCATIONS_CSV_FILE_URL = NewfoundlandConfig.getUrlParameter("csv");
+	NewfoundlandConfig.MAIN_CONTAINER_CSS_SELECTOR = NewfoundlandConfig.getUrlParameter("mapContainer");
+	NewfoundlandConfig.GOOGLE_MAPS_API_KEY = NewfoundlandConfig.getUrlParameter("apiKey");
+	NewfoundlandConfig.MAP_MARKER_IMAGE = NewfoundlandConfig.getUrlParameter("markerIcon");
+	
+	//load rest of required js files
+	NewfoundlandConfig.loadJS("com/libs/require.js");
+	NewfoundlandConfig.loadJS("newfoundland.js");
+	
+});
