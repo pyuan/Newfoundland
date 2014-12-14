@@ -9,7 +9,7 @@ var NewfoundlandConfig =
 	GOOGLE_MAPS_API_KEY : "",
 	
 	//full url path for the locations csv data file 
-	LOCATIONS_CSV_FILE_URL : "data/locations.csv",
+	LOCATIONS_CSV_FILE_URL : "https://cdn.shopify.com/s/files/1/0150/9610/files/locations.csv?688",
 	
 	//css selector to create the widget in
 	MAIN_CONTAINER_CSS_SELECTOR : "#map-container",
