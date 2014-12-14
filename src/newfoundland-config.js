@@ -15,6 +15,9 @@ var NewfoundlandConfig =
 	MAIN_CONTAINER_CSS_SELECTOR : "#map-container",
 	
 	//full path to the marker image
-	MAP_MARKER_IMAGE : "http://pyuan.github.io/Newfoundland/src/images/icon_marker.png"
+	MAP_MARKER_IMAGE : "http://pyuan.github.io/Newfoundland/src/images/icon_marker.png",
+	
+	//LESS styles file
+	LESS_FILE_HREF : "https://cdn.shopify.com/s/files/1/0150/9610/files/newfoundland.less?686",
 	
 };
