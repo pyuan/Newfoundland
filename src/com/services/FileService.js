@@ -14,8 +14,9 @@ define([
     	 * load a less file into the page by asynchronously load in the less file
     	 * run the LESS parser and insert result css into the head 
  		 * @param {String} fileHref
+ 		 * @param {function} completionHandler
     	 */
-		loadLessFile: function(fileHref) 
+		loadLessFile: function(fileHref, completionHandler) 
 		{
 			$.ajax({
 				type: "GET",
@@ -31,26 +32,28 @@ define([
 						var cssMarkUp = $("<style>" + output + "</style>");
 						$("head").append(cssMarkUp); 
 					});
+					
+					if(completionHandler) {
+						completionHandler();
+					}
 				}
 			});
 		},   
 		
 		/**
-		 * load a javascript file into the page by appending it to the HEAD
+		 * load a javascript file synchronously into the page
  		 * @param {String} fileHref
  		 * @param {function} completionHandler
 		 */
 		loadJSFile: function(fileHref, completionHandler)
 		{
-			//var script = $("<script/>").attr("type", "text/javascript").attr("src", fileHref);
-			//$("head").append(script);
-			
 			$.ajaxSetup({async: false});
 			$.getScript(fileHref, function() {
+				DebugService.println("FileService JS loaded", fileHref);
+				
 				if(completionHandler) {
 					completionHandler();
 				}
-				console.log(arguments);
 			});
 			$.ajaxSetup({async: true});
 		},
