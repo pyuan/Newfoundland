@@ -1,0 +1,3 @@
+<FilesMatch ".(js|css|less|html)">
+  Header set Access-Control-Allow-Origin "*"
+</FilesMatch>
