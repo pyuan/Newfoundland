@@ -89,7 +89,7 @@ define([
 			        position: google.maps.ControlPosition.LEFT_BOTTOM
 			    },
 			    scaleControl: true,
-			    streetViewControl: true,
+			    streetViewControl: false,
 			    streetViewControlOptions: {
 			        position: google.maps.ControlPosition.LEFT_BOTTOM
 			    }
