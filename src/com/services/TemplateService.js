@@ -22,7 +22,7 @@ define([
 		{
 			$.ajax({
 				type: "GET",
-				url: Constants.FOLDER_TEMPLATES + template + Constants.EXTENSION_TEMPLATES,
+				url: Constants.RESOURCE_URL + "/" + Constants.FOLDER_TEMPLATES + template + Constants.EXTENSION_TEMPLATES,
 				async: typeof async =="undefined" ? false : async,
 				cache: true,
 				dataType: "text",
