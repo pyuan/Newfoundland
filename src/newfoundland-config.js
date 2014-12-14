@@ -2,7 +2,7 @@ var NewfoundlandConfig =
 {
 	
 	//if set to true, print debug console statements
-	DEBUG_MODE : true,
+	DEBUG_MODE : false,
 	
 	//API key for google maps, optional
 	//can be found in your Google API console, if true, allows usage to be tracked
@@ -15,6 +15,6 @@ var NewfoundlandConfig =
 	MAIN_CONTAINER_CSS_SELECTOR : "#map-canvas",
 	
 	//full path to the marker image
-	MAP_MARKER_IMAGE : "images/icon_marker.png" //"http://pyuan.github.io/Newfoundland/src/images/icon_marker.png"
+	MAP_MARKER_IMAGE : "http://pyuan.github.io/Newfoundland/src/images/icon_marker.png"
 	
 };
