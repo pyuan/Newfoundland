@@ -12,7 +12,7 @@ var NewfoundlandConfig =
 	LOCATIONS_CSV_FILE_URL : "",
 	
 	//css selector to create the widget in
-	MAIN_CONTAINER_CSS_SELECTOR : "",
+	MAIN_CONTAINER_CSS_SELECTOR : "#map-container",
 	
 	//full path to the marker image
 	MAP_MARKER_IMAGE : "",
@@ -54,9 +54,7 @@ var NewfoundlandConfig =
 $(function() {
 	
 	//set configs based on url vars
-	NewfoundlandConfig.DEBUG_MODE = NewfoundlandConfig.getUrlParameter("debug").toLowerCase() == "true";
 	NewfoundlandConfig.LOCATIONS_CSV_FILE_URL = NewfoundlandConfig.getUrlParameter("csv");
-	NewfoundlandConfig.MAIN_CONTAINER_CSS_SELECTOR = NewfoundlandConfig.getUrlParameter("mapContainer");
 	NewfoundlandConfig.GOOGLE_MAPS_API_KEY = NewfoundlandConfig.getUrlParameter("apiKey");
 	NewfoundlandConfig.MAP_MARKER_IMAGE = NewfoundlandConfig.getUrlParameter("markerIcon");
 	
