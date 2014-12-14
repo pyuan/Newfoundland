@@ -22,6 +22,7 @@ define([
     	/**** Application constants ****/
     	GLOBAL_WINDOW_VARIABLE : "NEWFOUNDLAND_MAP",
     	GLOBAL_INIT_FUNCTION_NAME : "Newfoundland_init",
+    	RESOURCE_URL : "http://pyuan.github.io/Newfoundland/src",
     	
     	/**** Configurations constants ****/
     	CONFIG_OBJECT_NAME : "NewfoundlandConfig",

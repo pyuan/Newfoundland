@@ -5,11 +5,12 @@ require.config( {
 
             // Core Libraries
             "jquery"			: "http://code.jquery.com/jquery-2.1.1.min", 
-            "underscore"		: "com/libs/underscore-min",
-            "backbone"			: "com/libs/backbone-min",
-            "handlebars"		: "com/libs/handlebars-v2.0.0",
-            "less"				: "com/libs/lessc",
-            "jquerycsv"			: "com/libs/jquery.csv-0.71.min",
+            "underscore"		: "http://pyuan.github.io/Newfoundland/src/com/libs/underscore-min",
+            "backbone"			: "http://pyuan.github.io/Newfoundland/src/com/libs/backbone-min",
+            "handlebars"		: "http://pyuan.github.io/Newfoundland/src/com/libs/handlebars-v2.0.0",
+            "less"				: "http://pyuan.github.io/Newfoundland/src/com/libs/lessc",
+            "jquerycsv"			: "http://pyuan.github.io/Newfoundland/src/com/libs/jquery.csv-0.71.min",
+            "com"				: "http://pyuan.github.io/Newfoundland/src/com/",
       },
 
       // Sets the configuration for your third party scripts that are not AMD compatible
@@ -69,9 +70,9 @@ require([
 			FileService.loadLessFile(Constants.LESS_FILE_HREF);
 			
 			//load requireJS incompatible libraries
-			FileService.loadJSFile("com/libs/markerclusterer_packed.js"); //marker clusterer
+			FileService.loadJSFile(Constants.RESOURCE_URL + "/com/libs/markerclusterer_packed.js"); //marker clusterer
 			//FileService.loadJSFile("com/libs/infobubble-compiled.js"); //custom info window
-			FileService.loadJSFile("com/libs/infobox_packed.js"); //custom info window
+			FileService.loadJSFile(Constants.RESOURCE_URL + "/com/libs/infobox_packed.js"); //custom info window
 			
 			//initialize widget and store in window
 			var containerSelector = ConfigService.getConfig("MAIN_CONTAINER_CSS_SELECTOR");
