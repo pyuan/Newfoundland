@@ -38,11 +38,21 @@ define([
 		/**
 		 * load a javascript file into the page by appending it to the HEAD
  		 * @param {String} fileHref
+ 		 * @param {function} completionHandler
 		 */
-		loadJSFile: function(fileHref)
+		loadJSFile: function(fileHref, completionHandler)
 		{
-			var script = $("<script/>").attr("type", "text/javascript").attr("src", fileHref);
-			$("head").append(script);
+			//var script = $("<script/>").attr("type", "text/javascript").attr("src", fileHref);
+			//$("head").append(script);
+			
+			$.ajaxSetup({async: false});
+			$.getScript(fileHref, function() {
+				if(completionHandler) {
+					completionHandler();
+				}
+				console.log(arguments);
+			});
+			$.ajaxSetup({async: true});
 		},
 		    	
     });
