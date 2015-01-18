@@ -36,7 +36,7 @@ define([
 			var params = this.model.toJSON();
 			params.address = this.model.getFullAddress();
 			
-			var offsetY = marker.getIcon() ? 20 : 5;			
+			var offsetY = marker.getIcon() ? 20 : 5;
 			TemplateService.getTemplate(Constants.TEMPLATE_INFO_WINDOW, params, function(html){
 	        	
 	        	var options = {
