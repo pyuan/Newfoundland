@@ -132,6 +132,7 @@ define([
 		 */
 		recenterMapToUser: function()
 		{
+			alert(navigator)
 			if(navigator.geolocation) 
 			{
 				var self = this;
