@@ -156,7 +156,7 @@ define([
 			    	self.recenterMap();
 			    	DebugService.println("User location not accessible", "");
 			    	
-			    });
+			    }, {timeout: 10000});
 			}
 			else {
 				alert("Geolocation is not supported by this browser.");
