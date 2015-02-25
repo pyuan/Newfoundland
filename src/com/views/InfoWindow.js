@@ -67,6 +67,10 @@ define([
 		        	map.setCenter(marker.position);
 		        	map.setZoom(Constants.MAP_MARKER_ZOOM_LEVEL);
 		        });
+		        
+		        self.$el.find(".close").on("click", function() {
+		        	self.close();
+		        });
 	        	
 	        });
        	},
@@ -80,6 +84,14 @@ define([
         	if(this.base) {
         		this.base.close();
         	}
+        },
+        
+        /**
+         * returns if info window is currently open/visible
+         * @param none
+         */
+        isOpen: function() {
+        	return this.base.getVisible();
         },
 
     });

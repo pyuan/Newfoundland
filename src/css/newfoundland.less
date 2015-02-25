@@ -188,21 +188,33 @@
 			.name {
 				font-weight: bold;
 				font-size: (@base-font-size + 2);
-				margin-bottom: 10px;
+				line-height: (@base-font-size + 4);
+				margin: 0px 15px 10px 0px;
 			}
 			
 			.address {
 				margin-bottom: 5px;
 			}
 			
+			.close {
+				top: 5px;
+				right: 5px;
+				background-image: url("@{dir-images}/icon_x.png");
+			}
+			
 			.zoom {
+				bottom: 5px;
+				right: 5px;
+				background-image: url("@{dir-images}/icon_zoom.png");
+			}
+			
+			.btn {
 				position: absolute;
 				overflow: hidden;
 				width: 15px;
 				height: 15px;
-				top: 5px;
-				right: 5px;
-				background: url("@{dir-images}/icon_zoom.png") no-repeat center center;
+				background-repeat: no-repeat;
+				background-position: center center;
 				background-size: contain;
 				cursor: pointer;
 			}
