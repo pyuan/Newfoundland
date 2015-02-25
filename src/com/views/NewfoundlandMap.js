@@ -209,17 +209,19 @@ define([
 		 */
 		onMarkerClick: function(marker)
 		{
-			if(this.infoWindow) {
-				this.infoWindow.close();	
+			if(this.infoWindow && this.infoWindow.model !== marker.model) {
+				this.infoWindow.close();
 			}
 			
 			//allow info window to be toggled
-			if(!this.infoWindow || this.infoWindow.model !== marker.model) 
+			if(!this.infoWindow || this.infoWindow.model !== marker.model || 
+				(this.infoWindow && !this.infoWindow.isOpen())) 
 			{
 				this.infoWindow = new InfoWindow();
 				this.infoWindow.open(this.map, marker);
 			}
 			else {
+				this.infoWindow.close();
 				this.infoWindow = null;
 			}
 		},
