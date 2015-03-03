@@ -122,7 +122,15 @@ define([
 			}
 			
 			this.map.setZoom(0); //change zoom to fix cluster marker disappearing bug
-			this.map.fitBounds(this.bounds);
+			var defaultToContinentalUS = ConfigService.getConfig("DEFAULT_ZOOM_TO_CONTINENTAL_US") == "true";
+			if(defaultToContinentalUS) {
+				var centerOfUS = new google.maps.LatLng(39.833333, -98.583333);
+				this.map.setCenter(centerOfUS);
+				this.map.setZoom(4);
+			} else {
+				this.map.fitBounds(this.bounds);
+			}
+			
 			DebugService.println("Reset Map", "");
 		},
 		
