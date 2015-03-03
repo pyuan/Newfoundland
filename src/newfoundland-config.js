@@ -20,6 +20,9 @@ var NewfoundlandConfig =
 	//REQUIERD prefix for loading components
 	RESOURCE_URL : "",
 	
+	//Flag to set the default zoom to show just the continental US
+	DEFAULT_ZOOM_TO_CONTINENTAL_US : false,
+	
 	/**
 	 * get url variable
 	 * source: http://stackoverflow.com/a/21903119
@@ -57,6 +60,7 @@ $(function() {
 	NewfoundlandConfig.LOCATIONS_CSV_FILE_URL = NewfoundlandConfig.getUrlParameter("csv");
 	NewfoundlandConfig.GOOGLE_MAPS_API_KEY = NewfoundlandConfig.getUrlParameter("apiKey");
 	NewfoundlandConfig.MAP_MARKER_IMAGE = NewfoundlandConfig.getUrlParameter("markerIcon");
+	NewfoundlandConfig.DEFAULT_ZOOM_TO_CONTINENTAL_US = NewfoundlandConfig.getUrlParameter("defaultToContinentalUS");
 	
 	//load rest of required js files
 	NewfoundlandConfig.loadJS("com/libs/require.js");

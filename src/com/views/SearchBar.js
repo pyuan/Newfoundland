@@ -49,6 +49,15 @@ define([
     		this.$el.on("input mouseenter", ".search", function() {
     			self.search( $(this).val() );
     		});
+    		
+    		//trigger geocode search when enter key is tapped
+    		this.$el.on("keydown", ".search", function(e) {
+    			if(e.which == 13) {
+    				$(this).select();
+			        self.geocodeSearch( $(this).val() );
+			    }
+			    //console.log(e.which);
+    		});
         	
             return this; //Maintains chainability
         },
@@ -66,6 +75,25 @@ define([
         	
         	var results = LocationService.search(this.collection, key);
         	this.showSearchResults(results);
+        },
+        
+        /**
+         * geocode the entered string in search bar and center to location
+         * @param {String} key
+         */
+        geocodeSearch: function(key) {
+        	var scope = this;
+        	var geocoder = new google.maps.Geocoder();
+        	geocoder.geocode( {'address': key}, function(results, status) {
+        		if (status == google.maps.GeocoderStatus.OK) {
+        			if(results[0]) {
+        				var location = results[0].geometry.location;
+		        		scope.map.centerMap(location);
+        			}
+			    } else {
+			        DebugService.println("Search Bar", "Geocode was not successful for the following reason: " + status);
+			    }
+		    });
         },
         
         /**
