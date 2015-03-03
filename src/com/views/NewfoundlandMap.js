@@ -135,6 +135,16 @@ define([
 		},
 		
 		/**
+		 * center map to a google.maps.LatLng object
+		 * @param {google.maps.LatLng} location
+		 */
+		centerMap: function(location) {
+			this.map.setCenter(location);
+			this.map.setZoom(0);
+			this.map.setZoom(12);
+		},
+		
+		/**
 		 * zoom to center to where the user is
 		 * @param none
 		 */
