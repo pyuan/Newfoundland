@@ -55,6 +55,7 @@ define([
     			if(e.which == 13) {
     				$(this).select();
 			        self.geocodeSearch( $(this).val() );
+			        self.hideSearchResults();
 			    }
 			    //console.log(e.which);
     		});
