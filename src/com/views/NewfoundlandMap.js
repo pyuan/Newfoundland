@@ -263,6 +263,16 @@ define([
 		    this.map.setZoom(Constants.MAP_MARKER_ZOOM_LEVEL);
 		    this.onMarkerClick(marker);
 		},
+		
+		/**
+		 * force hide the info window
+		 * @param none
+		 */
+		hideInfoWindow: function() {
+			if(this.infoWindow) {
+				this.infoWindow.close();
+			}
+		},
 
         /**
          * do any cleanup, remove window binding here

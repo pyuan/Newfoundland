@@ -53,14 +53,75 @@ define([
     		//trigger geocode search when enter key is tapped
     		this.$el.on("keydown", ".search", function(e) {
     			if(e.which == 13) {
-    				$(this).select();
-			        self.geocodeSearch( $(this).val() );
-			        self.hideSearchResults();
+    				var results = self.$el.find(".results");
+        			var currentHighlightedResult = $(results).find(".highlighted");
+        			if (results.is(":visible") && currentHighlightedResult.length > 0) {
+        				var cid = $(currentHighlightedResult).attr("data-item-id");
+        				self.goToResult(cid);
+        			} else {
+        				$(this).select();
+				        self.geocodeSearch( $(this).val() );
+				        self.hideSearchResults();
+				        self.map.hideInfoWindow();
+        			}
+			    } else if (e.which == 40) {
+					self.highlightNextResult();			    
+			    } else if (e.which == 38) {
+			    	self.highlightPrevResult();
 			    }
-			    //console.log(e.which);
     		});
         	
             return this; //Maintains chainability
+        },
+        
+        /**
+         * highlight the next search result
+         * @param none
+         */
+        highlightNextResult: function() {
+        	var results = this.$el.find(".results");
+        	var currentHighlightedIndex = $(results).find(".highlighted").index();
+        	currentHighlightedIndex++;
+        	
+        	if(currentHighlightedIndex < 0) {
+        		currentHighlightedIndex = 0;
+        	} else if (currentHighlightedIndex >= $(results).find(".result").length - 1) {
+        		currentHighlightedIndex = $(results).find(".result").length - 1
+        	}
+        	this.highlightResult(currentHighlightedIndex);
+        },
+        
+        /**
+         * highlight the next search result
+         * @param none
+         */
+        highlightPrevResult: function() {
+        	var results = this.$el.find(".results");
+        	var currentHighlightedIndex = $(results).find(".highlighted").index();
+        	currentHighlightedIndex--;
+        	
+        	if(currentHighlightedIndex < 0) {
+        		currentHighlightedIndex = 0;
+        	}
+        	this.highlightResult(currentHighlightedIndex);
+        },
+        
+        /**
+         * highlight a specific search result by index
+         * remove highlight class from all other results
+         * @param {Int} index
+         */
+        highlightResult: function(index) {
+        	var results = this.$el.find(".results");
+        	if ($(results).is(":visible")) {
+        		var highlightedResult = $(results).find(".result").eq(index);
+	        	$(results).find(".result").removeClass("highlighted");
+	        	$(highlightedResult).addClass("highlighted");
+	        	$(results).scrollTo( $(highlightedResult), 250 );
+
+	        	var searchBar = this.$el.find(".search");
+	        	$(searchBar).val( $(highlightedResult).text() );
+        	}
         },
         
         /**
