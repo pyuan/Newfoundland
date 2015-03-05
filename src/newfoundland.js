@@ -10,6 +10,7 @@ require.config( {
             "handlebars"		: NewfoundlandConfig.RESOURCE_URL + "com/libs/handlebars-v2.0.0",
             "less"				: NewfoundlandConfig.RESOURCE_URL + "com/libs/lessc",
             "jquerycsv"			: NewfoundlandConfig.RESOURCE_URL + "com/libs/jquery.csv-0.71.min",
+            "scrollto"			: "//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/1.4.14/jquery.scrollTo.min",
             "com"				: NewfoundlandConfig.RESOURCE_URL + "com/",
             
       },
@@ -34,6 +35,10 @@ require.config( {
             "jquerycsv" : {
             	"deps" : ["jquery"],
             },
+            
+            "scrollto" : {
+            	"deps" : ["jquery"],
+            },
 
       } // end Shim Configuration
 
@@ -46,12 +51,13 @@ require([
 		"backbone",
 		"handlebars",
 		"less",
+		"scrollto",
 		"com/views/NewfoundlandMap",
 		"com/models/Constants",
 		"com/services/ConfigService",
 		"com/services/FileService",
 	
-	], function( $, Backbone, Handlebars, Less, NewfoundlandMap, Constants, ConfigService, FileService ) {
+	], function( $, Backbone, Handlebars, Less, ScrollTo, NewfoundlandMap, Constants, ConfigService, FileService ) {
 	
 	$(function() {
 		
