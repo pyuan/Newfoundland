@@ -26,7 +26,7 @@ define([
 				{
 					DebugService.println("FileService LESS loaded", fileHref);
 					
-					var parser = new (less.Parser);
+					var parser = new (LESS.Parser);
 					parser.parse(css, function(err, tree) {
 						var output = tree.toCSS();
 						var cssMarkUp = $("<style>" + output + "</style>");
