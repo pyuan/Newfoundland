@@ -4,7 +4,7 @@ require.config( {
       paths: {
 
             // Core Libraries
-            "jquery"			: NewfoundlandConfig.RESOURCE_URL + "com/libs/jquery-2.1.1.min", 
+            "jquery"			: NewfoundlandConfig.RESOURCE_URL + "com/libs/jquery-1.11.2.min", 
             "underscore"		: NewfoundlandConfig.RESOURCE_URL + "com/libs/underscore-min",
             "backbone"			: NewfoundlandConfig.RESOURCE_URL + "com/libs/backbone-min",
             "handlebars"		: NewfoundlandConfig.RESOURCE_URL + "com/libs/handlebars-v2.0.0",
