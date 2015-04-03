@@ -4,11 +4,12 @@ require.config( {
       paths: {
 
             // Core Libraries
+            //"less"              : NewfoundlandConfig.RESOURCE_URL + "com/libs/lessc", //not compatible with ie8
+            //"jquery"            : NewfoundlandConfig.RESOURCE_URL + "com/libs/jquery-2.1.1.min", //not compatible with ie8
             "jquery"			: NewfoundlandConfig.RESOURCE_URL + "com/libs/jquery-1.11.2.min", 
             "underscore"		: NewfoundlandConfig.RESOURCE_URL + "com/libs/underscore-min",
             "backbone"			: NewfoundlandConfig.RESOURCE_URL + "com/libs/backbone-min",
             "handlebars"		: NewfoundlandConfig.RESOURCE_URL + "com/libs/handlebars-v2.0.0",
-            "less"				: NewfoundlandConfig.RESOURCE_URL + "com/libs/lessc",
             "jquerycsv"			: NewfoundlandConfig.RESOURCE_URL + "com/libs/jquery.csv-0.71.min",
             "scrollto"			: "//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/1.4.14/jquery.scrollTo.min",
             "com"				: NewfoundlandConfig.RESOURCE_URL + "com/",
@@ -50,14 +51,13 @@ require([
 		"jquery",
 		"backbone",
 		"handlebars",
-		"less",
 		"scrollto",
 		"com/views/NewfoundlandMap",
 		"com/models/Constants",
 		"com/services/ConfigService",
 		"com/services/FileService",
 	
-	], function( $, Backbone, Handlebars, Less, ScrollTo, NewfoundlandMap, Constants, ConfigService, FileService ) {
+	], function( $, Backbone, Handlebars, ScrollTo, NewfoundlandMap, Constants, ConfigService, FileService ) {
 	
 	$(function() {
 		
@@ -74,7 +74,7 @@ require([
 		window[Constants.GLOBAL_INIT_FUNCTION_NAME] = function() 
 		{
 			//load less 
-			FileService.loadLessFile(ConfigService.getConfig("RESOURCE_URL") + Constants.LESS_FILE_HREF);
+			FileService.loadCSSFile(ConfigService.getConfig("RESOURCE_URL") + Constants.CSS_FILE_HREF);
 			
 			//load requireJS incompatible libraries
 			

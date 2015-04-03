@@ -28,7 +28,7 @@ define([
     	CONFIG_OBJECT_NAME : "NewfoundlandConfig",
     	
     	/**** LESS constants ****/
-    	LESS_FILE_HREF : "css/newfoundland.less",
+    	CSS_FILE_HREF : "css/newfoundland.css",
     	ROOT_CONTAINER_CSS_CLASS : "newfoundland-root",
     	
     	/**** templates constants ****/
