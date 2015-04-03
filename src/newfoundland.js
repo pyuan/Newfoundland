@@ -74,7 +74,7 @@ require([
 		window[Constants.GLOBAL_INIT_FUNCTION_NAME] = function() 
 		{
 			//load less 
-			//FileService.loadLessFile(ConfigService.getConfig("RESOURCE_URL") + Constants.LESS_FILE_HREF);
+			FileService.loadLessFile(ConfigService.getConfig("RESOURCE_URL") + Constants.LESS_FILE_HREF);
 			
 			//load requireJS incompatible libraries
 			
