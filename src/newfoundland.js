@@ -62,6 +62,7 @@ require([
 	$(function() {
 		
 		//load google maps API
+		/*
 		var url = Constants.GOOGLE_MAPS_API_URL + ConfigService.getConfig("GOOGLE_MAPS_API_KEY");
 		var apiKey = ConfigService.getConfig("GOOGLE_MAPS_API_KEY");
 		if(apiKey) {
@@ -69,6 +70,7 @@ require([
 		}
 		url += "&callback=" + Constants.GLOBAL_INIT_FUNCTION_NAME + "";
 		FileService.loadJSFile(url);
+		*/
 		
 		//store init function in window so app can be initialized after google maps has been loaded
 		window[Constants.GLOBAL_INIT_FUNCTION_NAME] = function() 
