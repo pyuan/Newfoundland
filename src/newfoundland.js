@@ -73,6 +73,7 @@ require([
 		//store init function in window so app can be initialized after google maps has been loaded
 		window[Constants.GLOBAL_INIT_FUNCTION_NAME] = function() 
 		{
+		    /*
 			//load less 
 			FileService.loadLessFile(ConfigService.getConfig("RESOURCE_URL") + Constants.LESS_FILE_HREF);
 			
@@ -89,6 +90,7 @@ require([
 				window[Constants.GLOBAL_WINDOW_VARIABLE] = new NewfoundlandMap({el: $(containerSelector)});
 				
 			});
+			*/
 		}
 		
 	});	
