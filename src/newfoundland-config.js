@@ -64,6 +64,6 @@ $(function() {
 	
 	//load rest of required js files
 	NewfoundlandConfig.loadJS("com/libs/require.js");
-	NewfoundlandConfig.loadJS("newfoundland.js");
+	//NewfoundlandConfig.loadJS("newfoundland.js");
 	
 });
