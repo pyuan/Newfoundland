@@ -2,9 +2,10 @@ define([
 		
 		"jquery", 
 		"backbone",
+		"less",
 		"com/services/DebugService",
 	
-	], function( $, Backbone, DebugService ) {
+	], function( $, Backbone, LESS, DebugService ) {
 		
     // Extends Backbone.Model
     var FileService = Backbone.Model.extend({}, {
@@ -15,7 +16,6 @@ define([
  		 * @param {String} fileHref
  		 * @param {function} completionHandler
     	 */
-    	/*
 		loadLessFile: function(fileHref, completionHandler) 
 		{
 			$.ajax({
@@ -38,33 +38,7 @@ define([
 					}
 				}
 			});
-		},  
-		*/ 
-		
-		/**
-		 * load a css file into the page
-		 * @param {String} fileHref
-		 * @param {function} completionHandler
-		 */
-		loadCSSFile: function(fileHref, completionHandler) 
-		{
-		    $.ajax({
-                type: "GET",
-                url: fileHref,
-                cache: false,
-                success: function(css)
-                {
-                    DebugService.println("FileService CSS loaded", fileHref);
-                    
-                    var cssMarkUp = $("<style>" + css + "</style>");
-                    $("head").append(cssMarkUp); 
-                    
-                    if(completionHandler) {
-                        completionHandler();
-                    }
-                }
-            });
-		},
+		},   
 		
 		/**
 		 * load a javascript file synchronously into the page
