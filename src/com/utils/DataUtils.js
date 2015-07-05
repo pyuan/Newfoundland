@@ -9,12 +9,15 @@ define([
     var DataUtils = Backbone.Model.extend({}, {
     	
     	/**
-    	 * remove comments from the csvString
+    	 * remove csv comments from the csv file
+    	 * remove line breaks from each row of data
+    	 * remove white space at the end of each row of data
     	 * @param {String} csvString
     	 * @return {String} csvString
     	 */
     	cleanCSVString: function(csvString)
     	{
+    	    csvString = csvString.replace(/\n{2,}/g, '\n');
     		var arr = csvString.split("\n");
     		for(var i in arr) 
     		{
@@ -22,6 +25,7 @@ define([
     			if(item.length == 0 || item[0] == "\"") {
     				arr.splice(i, 1);
     			}
+    			arr[i] = $.trim( item.replace(/\n/g, '') );
     		}
     		
     		csvString = arr.join("\n");
