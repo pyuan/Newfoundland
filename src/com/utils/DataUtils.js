@@ -17,17 +17,22 @@ define([
     	 */
     	cleanCSVString: function(csvString)
     	{
-    	    csvString = csvString.replace(/\n{2,}/g, '\n');
+    	    csvString = csvString.replace(/\n{2,}/g, '\n'); //replace 2 or more line breaks in a row with just one line break
+    	    csvString = csvString.replace(/[“”]/g, '\""'); //replace double curly quotes with double quotes
+    	    csvString = csvString.replace(/’/g, '\''); //replace single curly quotes with single quote
+    	    
     		var arr = csvString.split("\n");
     		for(var i in arr) 
     		{
     			var item = arr[i];
-    			if(item.length == 0 || item[0] == "\"") {
+    			item = item.replace(/^\"[\\n]"$/g, ''); //remove all line breaks within two double quotes 
+    			item = $.trim(item); //remove whitespace at either ends of string
+    			if(item.length == 0) {
     				arr.splice(i, 1);
+    				continue;
     			}
-    			arr[i] = $.trim( item.replace(/\n/g, '') );
+    			arr[i] = item;
     		}
-    		
     		csvString = arr.join("\n");
     		return csvString;
     	},
