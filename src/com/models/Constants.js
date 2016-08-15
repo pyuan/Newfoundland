@@ -10,7 +10,7 @@ define([
     	
     	/**** Configuration Defaults ****/
     	DEBUG_MODE : true,
-    	GOOGLE_MAPS_API_KEY : "",
+    	GOOGLE_MAPS_API_KEY : "AIzaSyBncU4-rfyF3AQUSHTxkGwtCLsourKsOA4",
     	LOCATIONS_CSV_FILE_URL : "data/locations.csv",
     	MAIN_CONTAINER_CSS_SELECTOR : "#map-container",
     	MAP_MARKER_IMAGE : "",
