@@ -65,7 +65,7 @@ require([
 		var url = Constants.GOOGLE_MAPS_API_URL + ConfigService.getConfig("GOOGLE_MAPS_API_KEY");
 		var apiKey = ConfigService.getConfig("GOOGLE_MAPS_API_KEY");
 		if(apiKey) {
-			url += "key=" + apiKey
+			url += "&key=" + apiKey
 		}
 		url += "&callback=" + Constants.GLOBAL_INIT_FUNCTION_NAME + "";
 		FileService.loadJSFile(url);
@@ -82,7 +82,7 @@ require([
 			FileService.loadJSFile(ConfigService.getConfig("RESOURCE_URL") + "com/libs/infobox_packed.js"); 
 			
 			//marker clusterer
-			FileService.loadJSFile(ConfigService.getConfig("RESOURCE_URL") + "com/libs/markerclusterer_packed.js", function() {
+			FileService.loadJSFile(ConfigService.getConfig("RESOURCE_URL") + "com/libs/markerclusterer.js", function() {
 				
 				//initialize widget and store in window
 				var containerSelector = ConfigService.getConfig("MAIN_CONTAINER_CSS_SELECTOR");
